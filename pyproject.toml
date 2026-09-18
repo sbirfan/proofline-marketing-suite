@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "svgai-marketing-suite"
-version = "0.9.0"
+version = "1.0.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,7 +12,7 @@ license = { file = "LICENSE" }
 authors = [{ name = "Syed Irfan" }]
 keywords = ["marketing", "audit", "seo", "claude-code", "cro"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 5 - Production/Stable",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",

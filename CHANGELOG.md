@@ -4,6 +4,20 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-18
+
+### Added
+
+- Stable 1.x support, compatibility, and deprecation policy
+- Public-beta-to-stable migration guide and 1.0 release notes
+- Direct CLI regression coverage for diagnostics and stable subcommands
+
+### Changed
+
+- Project maturity classifier advanced to Production/Stable
+- Package and plugin versions advanced to 1.0.0
+- Release validation now requires the stable policy, migration, and release-note documents
+
 ## [0.9.0] - 2026-09-18
 
 ### Added

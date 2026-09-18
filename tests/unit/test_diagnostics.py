@@ -1,13 +1,13 @@
 import json
 
-from svgai_marketing import diagnostics
+from svgai_marketing import __version__, diagnostics
 
 
 def test_diagnostics_are_secret_free_and_machine_readable() -> None:
     report = diagnostics.collect_diagnostics()
     payload = json.loads(diagnostics.render_diagnostics(report, as_json=True))
 
-    assert payload["version"] == "0.9.0"
+    assert payload["version"] == __version__
     assert payload["healthy"] is True
     assert set(payload) == {
         "version",

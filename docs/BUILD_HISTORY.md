@@ -16,7 +16,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/analysis-capabilities` |
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/campaign-capabilities` |
 | Public beta | 0.9.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/public-beta` |
-| Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
+| Stable release | 1.0.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/stable-release` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -276,6 +276,31 @@ Still deferred to the stable release:
 
 - Long-term compatibility and deprecation policy
 - Stable support policy, migration guide, and 1.0 release notes
+
+## Phase 1.0.0 — Stable Release
+
+Completed on 2026-09-18.
+
+Built:
+
+- Stable compatibility promise for the documented CLI, plugin skill names, and versioned output contracts
+- CPython 3.11–3.13 support policy across Linux, macOS, and Windows
+- Patch/minor/major change policy with a documented deprecation window and security exception
+- Schema and score-version consumer rules, including rejection of unknown major schemas
+- Public-beta-to-stable migration guide and comprehensive 1.0 release notes
+- Direct CLI regression tests and stable-release document checks in the release validator
+- Production/Stable package metadata and synchronized 1.0.0 package/plugin versions
+
+Quality record at phase completion:
+
+- All local formatting, lint, typing, test, coverage, schema, evaluation, build, and clean-wheel gates are required
+- Phase and release PRs both require successful cross-platform CI and CodeQL before merge
+
+Known limits retained deliberately:
+
+- Single-primary-page audit scheduling, opt-in rendering, and caller-provided specialist execution
+- No provider-specific publishing, authenticated crawling, or automatic external-account mutation
+- No guarantee of rankings, regulatory compliance, accessibility compliance, or revenue impact
 
 ## Maintenance rule
 
