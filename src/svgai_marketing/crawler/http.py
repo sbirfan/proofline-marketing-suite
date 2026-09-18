@@ -18,8 +18,10 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from ..models import FetchObservation, ObservationStatus
 
 DEFAULT_USER_AGENT = (
-    "SVG-AI-Marketing-Audit/0.2 (+https://github.com/sbirfan/svgai-marketing-suite)"
+    "SVG-AI-Marketing-Audit/0.4 (+https://github.com/sbirfan/svgai-marketing-suite)"
 )
+MAX_URL_LENGTH = 8_192
+MAX_REDIRECTS = 5
 Resolver = Callable[..., object]
 
 
@@ -49,6 +51,8 @@ class FetchResult:
 
 def validate_public_url(url: str, *, resolver: Resolver = socket.getaddrinfo) -> None:
     """Reject non-HTTP targets, credentials, and non-global destination addresses."""
+    if len(url) > MAX_URL_LENGTH or any(ord(character) < 32 for character in url):
+        raise UnsafeAddressError("invalid_url")
     parts = urlsplit(url)
     if parts.scheme not in {"http", "https"} or not parts.hostname:
         raise UnsafeAddressError("unsupported_url")
@@ -75,10 +79,16 @@ def validate_public_url(url: str, *, resolver: Resolver = socket.getaddrinfo) ->
 
 
 class ValidatingRedirectHandler(HTTPRedirectHandler):
-    def __init__(self, validator: Callable[[str], None], chain: list[str]) -> None:
+    def __init__(
+        self,
+        validator: Callable[[str], None],
+        chain: list[str],
+        max_redirects: int = MAX_REDIRECTS,
+    ) -> None:
         super().__init__()
         self.validator = validator
         self.chain = chain
+        self.max_redirects = max_redirects
 
     def redirect_request(
         self,
@@ -90,6 +100,8 @@ class ValidatingRedirectHandler(HTTPRedirectHandler):
         new_url: str,
     ) -> Request | None:
         resolved = urljoin(request.full_url, new_url)
+        if len(self.chain) > self.max_redirects:
+            raise HTTPError(resolved, code, "redirect_limit_exceeded", headers, file_pointer)
         self.validator(resolved)
         self.chain.append(resolved)
         return super().redirect_request(request, file_pointer, code, message, headers, resolved)
@@ -136,6 +148,7 @@ class SafeHttpClient:
             with opener.open(request, timeout=self.timeout) as response:
                 status = response.getcode()
                 final_url = response.geturl()
+                self._validate(final_url)
                 if redirect_chain[-1] != final_url:
                     redirect_chain.append(final_url)
                 content_type = response.headers.get_content_type()

@@ -10,7 +10,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Foundation | 0.1.0 | Complete | 2026-09-18 | 2026-09-18 | PR #1, commit `652f82b6` |
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/evidence-engine` |
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/technical-audit` |
-| Security and packaging | 0.4.0 | Planned | — | — | EPICs 18–19 |
+| Security and packaging | 0.4.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
 | Full Marketing Audit | 0.5.0 | Planned | — | — | EPICs 10–14 |
 | Client reporting | 0.6.0 | Planned | — | — | EPIC 16 |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
@@ -107,6 +107,37 @@ Still deferred to later phases:
 - External language-model invocation from the Python runtime
 - Complete accessibility, measurement, broken-link, performance, and consent analysis
 - Content, conversion, competitive, brand, and growth specialist synthesis
+- HTML and PDF report rendering
+
+## Phase 0.4.0 — Security and Packaging
+
+Completed on 2026-09-18.
+
+Built:
+
+- Recursive redaction for common access-token formats, authorization values, sensitive mapping keys, URL
+  credentials, and secret-bearing query parameters
+- Untrusted-text sanitization that removes control characters, neutralizes evidence-boundary delimiters, and
+  caps content before it can enter an agent prompt
+- URL length and redirect limits plus validation of the response's final URL, including custom transport paths
+- A standard-library release validator for synchronized package/plugin versions, closed schemas, skill
+  frontmatter, and documented untrusted-content boundaries
+- Reproducible source and wheel builds, followed by clean-environment wheel installation and CLI smoke testing
+  as a dedicated GitHub CI job
+- Security regression tests and an expanded threat-model document
+
+Quality record at phase completion:
+
+- Ruff formatting and lint: passed
+- Strict mypy: passed
+- Pytest and JSON Schema validation: required locally and in GitHub CI
+- Build, metadata validation, wheel installation, and installed CLI smoke test: required in GitHub CI
+
+Still deferred to later phases:
+
+- Authenticated crawling and storage of private client data
+- External specialist-model execution
+- Signing or publishing packages to a public registry
 - HTML and PDF report rendering
 
 ## Maintenance rule
