@@ -3,8 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** early alpha (`0.1.0`). The static technical audit is functional. Browser-rendered collection,
-> multi-page crawling, competitor research, and full specialist synthesis remain roadmap work.
+> **Status:** alpha (`0.2.0 — Evidence Engine`). Public-page evidence collection, recursive sitemap discovery,
+> structured robots analysis, visibility-aware HTML extraction, deterministic findings, partial scoring, and
+> JSON/Markdown reporting are functional. Multi-page audit scheduling, competitor research, and full specialist
+> synthesis remain roadmap work.
 
 ## Why this project exists
 
@@ -17,6 +19,19 @@ collection → evidence → deterministic findings → scores → interpretation
 
 Blocked requests, TLS failures, malformed responses, missing resources, and render-required pages remain
 different states. Scores use a single 0–100 scale, with confidence and coverage reported separately.
+
+## Delivery phases
+
+| Phase | Version | Status | Completed |
+|---|---|---|---|
+| Foundation | 0.1.0 | Complete | 2026-09-18 |
+| Evidence Engine | 0.2.0 | Complete | 2026-09-18 |
+| Technical Audit | 0.3.0 | Planned | — |
+| Full Marketing Audit | 0.5.0 | Planned | — |
+| Stable release | 1.0.0 | Planned | — |
+
+The detailed, dated record of what each phase built and deferred is maintained in
+[Build history](docs/BUILD_HISTORY.md).
 
 ## Install for development
 
@@ -65,9 +80,14 @@ evidence rather than browsing independently.
 ## Current capabilities
 
 - Verified-TLS HTTP fetches with timeout and response-size limits
+- Public-address enforcement for initial URLs and redirect targets
+- Redirect-chain, final-URL, response-size, content-type, encoding, and timing provenance
 - Explicit observed, blocked, failed, and render-required states
 - Static HTML extraction that excludes script, style, SVG, templates, and framework payloads from visible text
-- robots.txt and sitemap discovery with preserved failure reasons
+- Visibility-aware exclusion of hidden, aria-hidden, `display:none`, `visibility:hidden`, canvas, and noscript text
+- Structured robots.txt groups, rules, crawl delays, sitemap declarations, digests, and access evaluation
+- Bounded recursive sitemap-index and gzip traversal with scope, depth, count, and decompression limits
+- Page language, visible word counts, internal/external link classification, link text, and form requirements
 - Deterministic checks for titles, descriptions, headings, indexability, canonicals, image alternatives,
   structured data, Open Graph metadata, and conversion actions
 - Versioned JSON schemas and 0–100 category scores
@@ -80,10 +100,11 @@ See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.m
 
 ## Important limitations
 
-The current release audits one public page using static HTML. It detects likely app shells and can render
-them when `--browser-fallback` is requested and optional Playwright support is installed. Competitive and
-growth scores remain `not_tested` until relevant
-evidence exists. A partial overall score covers tested categories only and is labeled accordingly.
+The current release analyzes one target page while using robots.txt and sitemaps for discovery evidence; it
+does not yet schedule an audit of every discovered page. It detects likely app shells and can render them when
+`--browser-fallback` is requested and optional Playwright support is installed. Competitive and growth scores
+remain `not_tested` until relevant evidence exists. A partial overall score covers tested categories only and
+is labeled accordingly.
 
 Audit output is decision support, not a guarantee of search rankings, accessibility compliance, privacy
 compliance, or revenue impact. Manually verify client-facing claims.

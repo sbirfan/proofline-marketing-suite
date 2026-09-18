@@ -38,15 +38,23 @@ class FetchObservation:
     http_status: int | None = None
     final_url: str | None = None
     content_type: str | None = None
+    content_length: int | None = None
+    encoding: str | None = None
     reason: str | None = None
     render_mode: str = "static"
     confidence: float = 1.0
     elapsed_ms: int | None = None
+    redirect_chain: list[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if not self.redirect_chain:
+            self.redirect_chain.append(self.url)
 
 
 @dataclass(slots=True)
 class PageEvidence:
     url: str
+    language: str | None = None
     title: str | None = None
     meta_description: str | None = None
     canonical: str | None = None
@@ -59,6 +67,7 @@ class PageEvidence:
     json_ld: list[Any] = field(default_factory=list)
     open_graph: dict[str, str] = field(default_factory=dict)
     visible_text: str = ""
+    visible_word_count: int = 0
     tracking_indicators: list[str] = field(default_factory=list)
     render_required_reasons: list[str] = field(default_factory=list)
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import re
 from html.parser import HTMLParser
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from ..models import PageEvidence
 
@@ -18,7 +18,22 @@ TRACKING_SIGNATURES = {
     "hubspot": ("js.hs-scripts.com",),
 }
 
-HIDDEN_TAGS = {"script", "style", "svg", "template", "canvas", "head"}
+HIDDEN_TAGS = {"script", "style", "svg", "template", "canvas", "head", "noscript"}
+VOID_TAGS = {
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "source",
+    "track",
+    "wbr",
+}
 
 
 class PageParser(HTMLParser):
@@ -27,6 +42,7 @@ class PageParser(HTMLParser):
         self.url = url
         self.page = PageEvidence(url=url)
         self._hidden_depth = 0
+        self._hidden_stack: list[bool] = []
         self._heading: str | None = None
         self._heading_parts: list[str] = []
         self._button_depth = 0
@@ -36,12 +52,30 @@ class PageParser(HTMLParser):
         self._json_ld_parts: list[str] = []
         self._title_depth = 0
         self._title_parts: list[str] = []
+        self._active_link: dict[str, str] | None = None
+        self._link_parts: list[str] = []
+
+    @staticmethod
+    def _is_hidden(tag: str, data: dict[str, str | None]) -> bool:
+        style = (data.get("style") or "").lower().replace(" ", "")
+        return (
+            tag in HIDDEN_TAGS
+            or "hidden" in data
+            or (data.get("aria-hidden") or "").lower() == "true"
+            or "display:none" in style
+            or "visibility:hidden" in style
+        )
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
         data = {key.lower(): value for key, value in attrs}
-        if tag in HIDDEN_TAGS:
+        hidden_here = self._is_hidden(tag, data)
+        if tag not in VOID_TAGS:
+            self._hidden_stack.append(hidden_here)
+        if hidden_here and tag not in VOID_TAGS:
             self._hidden_depth += 1
+        if tag == "html":
+            self.page.language = data.get("lang")
         if tag == "title":
             self._title_depth += 1
         if tag == "script" and (data.get("type") or "").lower() == "application/ld+json":
@@ -69,9 +103,20 @@ class PageParser(HTMLParser):
         elif tag == "a":
             href = data.get("href")
             if href:
-                self.page.links.append(
-                    {"href": urljoin(self.url, href), "rel": data.get("rel") or ""}
+                absolute = urljoin(self.url, href)
+                kind = (
+                    "internal"
+                    if urlsplit(absolute).netloc == urlsplit(self.url).netloc
+                    else "external"
                 )
+                self._active_link = {
+                    "href": absolute,
+                    "rel": data.get("rel") or "",
+                    "kind": kind,
+                    "text": "",
+                }
+                self._link_parts = []
+                self.page.links.append(self._active_link)
         elif tag == "img":
             src = data.get("src")
             self.page.images.append(
@@ -83,17 +128,27 @@ class PageParser(HTMLParser):
                     "action": urljoin(self.url, data.get("action") or ""),
                     "method": (data.get("method") or "get").lower(),
                     "fields": 0,
+                    "required_fields": 0,
                 }
             )
         elif tag in {"input", "select", "textarea"} and self.page.forms:
             self.page.forms[-1]["fields"] += 1
+            if "required" in data:
+                self.page.forms[-1]["required_fields"] = (
+                    int(self.page.forms[-1].get("required_fields", 0)) + 1
+                )
+            if tag == "input" and (data.get("type") or "").lower() in {"submit", "button"}:
+                value = (data.get("value") or "").strip()
+                if value:
+                    self.page.buttons.append(value)
         elif tag == "button":
             self._button_depth += 1
             self._button_parts = []
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self.handle_starttag(tag, attrs)
-        self.handle_endtag(tag)
+        if tag.lower() not in VOID_TAGS:
+            self.handle_endtag(tag)
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.lower()
@@ -109,6 +164,10 @@ class PageParser(HTMLParser):
                 self.page.buttons.append(value)
             self._button_depth -= 1
             self._button_parts = []
+        if tag == "a" and self._active_link is not None:
+            self._active_link["text"] = " ".join(self._link_parts).strip()
+            self._active_link = None
+            self._link_parts = []
         if tag == "script" and self._json_ld_depth:
             raw = "".join(self._json_ld_parts).strip()
             if raw:
@@ -122,18 +181,22 @@ class PageParser(HTMLParser):
             self.page.title = " ".join(self._title_parts).strip() or None
             self._title_depth -= 1
             self._title_parts = []
-        if tag in HIDDEN_TAGS and self._hidden_depth:
-            self._hidden_depth -= 1
+        if tag not in VOID_TAGS and self._hidden_stack:
+            hidden_here = self._hidden_stack.pop()
+            if hidden_here and self._hidden_depth:
+                self._hidden_depth -= 1
 
     def handle_data(self, data: str) -> None:
         if self._json_ld_depth:
             self._json_ld_parts.append(data)
         if self._title_depth:
             self._title_parts.append(data)
-        if self._heading is not None:
+        if self._heading is not None and not self._hidden_depth:
             self._heading_parts.append(data)
-        if self._button_depth:
+        if self._button_depth and not self._hidden_depth:
             self._button_parts.append(data)
+        if self._active_link is not None and not self._hidden_depth:
+            self._link_parts.append(data)
         if not self._hidden_depth:
             cleaned = " ".join(data.split())
             if cleaned:
@@ -141,13 +204,14 @@ class PageParser(HTMLParser):
 
     def finish(self, raw_html: str) -> PageEvidence:
         self.page.visible_text = " ".join(self._text)
+        self.page.visible_word_count = len(self.page.visible_text.split())
         lowered = raw_html.lower()
         self.page.tracking_indicators = [
             name
             for name, signatures in TRACKING_SIGNATURES.items()
             if any(value in lowered for value in signatures)
         ]
-        text_len = len(self.page.visible_text.split())
+        text_len = self.page.visible_word_count
         if text_len < 50 and any(
             marker in lowered
             for marker in ("__next_data__", "data-reactroot", 'id="root"', 'id="app"')
