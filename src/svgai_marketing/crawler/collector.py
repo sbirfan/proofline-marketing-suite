@@ -27,7 +27,7 @@ class EvidenceCollector:
         if result.body is not None:
             final_url = result.observation.final_url or normalized
             page = parse_html(
-                self.client.decode(result.body, result.observation.content_type), final_url
+                self.client.decode(result.body, result.observation.encoding), final_url
             )
             if page.render_required_reasons:
                 result.observation.status = ObservationStatus.RENDER_REQUIRED

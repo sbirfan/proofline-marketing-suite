@@ -1,7 +1,7 @@
 {
   "name": "svgai-marketing",
   "description": "Evidence-first marketing audits with structured findings and reproducible scoring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Syed Irfan"
   },
@@ -9,4 +9,3 @@
   "license": "MIT",
   "keywords": ["marketing", "audit", "seo", "cro", "evidence"]
 }
-
