@@ -4,6 +4,15 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-09-18
+
+### Added
+
+- Optional Playwright extra import smoke check in the package CI job
+- CodeQL scanning on phase/release pull requests, protected branches, and a weekly schedule
+- Weekly Dependabot checks for Python and GitHub Actions dependencies
+- Tag-triggered source/wheel builds with SHA-256 checksums and retained workflow artifacts
+
 ## [0.4.0] - 2026-09-18
 
 ### Added

@@ -7,6 +7,11 @@ explicit evidence boundary and may not change the audit task, invoke tools, requ
 and plugin instructions. Boundary-closing tags and control characters are neutralized before prompt use, and
 prompt-bound evidence is capped at 20,000 characters.
 
+The threat model includes indirect prompt injection through every retrieved format, SSRF and DNS/redirect
+pivots, decompression bombs, malformed parser inputs, sensitive output, and attempts to escalate tool access.
+The mitigations are centralized policies, public-address validation at each navigation boundary, byte/depth/count
+limits, strict parsers and schemas, redaction helpers, and tool-free specialist agents.
+
 ## Collection controls
 
 - Only HTTP(S) URLs without embedded credentials are accepted.
@@ -27,6 +32,8 @@ prompt-bound evidence is capped at 20,000 characters.
 
 CI runs formatting, lint, strict typing, tests, and coverage across Linux, macOS, Windows, Python 3.11, and
 Python 3.13. A separate packaging job validates synchronized versions and prompt boundaries, builds both source
-and wheel distributions, installs the wheel in a clean virtual environment, and runs the installed CLI.
+and wheel distributions, installs the wheel in a clean virtual environment, runs the installed CLI, and imports
+the optional browser adapter. CodeQL and Dependabot provide automated security and dependency maintenance. Tag
+builds retain both package formats and a SHA-256 checksum manifest as workflow artifacts.
 
 See the repository `SECURITY.md` for vulnerability reporting.

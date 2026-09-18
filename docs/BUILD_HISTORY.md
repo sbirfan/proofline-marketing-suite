@@ -10,7 +10,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Foundation | 0.1.0 | Complete | 2026-09-18 | 2026-09-18 | PR #1, commit `652f82b6` |
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/evidence-engine` |
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/technical-audit` |
-| Security and packaging | 0.4.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
+| Security and packaging | 0.4.1 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
 | Full Marketing Audit | 0.5.0 | Planned | — | — | EPICs 10–14 |
 | Client reporting | 0.6.0 | Planned | — | — | EPIC 16 |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
@@ -109,7 +109,7 @@ Still deferred to later phases:
 - Content, conversion, competitive, brand, and growth specialist synthesis
 - HTML and PDF report rendering
 
-## Phase 0.4.0 — Security and Packaging
+## Phase 0.4.0–0.4.1 — Security and Packaging
 
 Completed on 2026-09-18.
 
@@ -124,6 +124,8 @@ Built:
   frontmatter, and documented untrusted-content boundaries
 - Reproducible source and wheel builds, followed by clean-environment wheel installation and CLI smoke testing
   as a dedicated GitHub CI job
+- Optional Playwright-extra import smoke testing, CodeQL analysis, weekly dependency updates, and tag-triggered
+  release builds that retain source/wheel distributions with SHA-256 checksums
 - Security regression tests and an expanded threat-model document
 
 Quality record at phase completion:
