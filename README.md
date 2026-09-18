@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.5.0 — Full Marketing Audit`). Evidence collection, deterministic checks, explicit score
-> rules, six evidence-bounded specialist briefs, confirmed competitor collection, failure-isolated specialist
-> adapters, deterministic synthesis, and JSON/Markdown reporting are functional. The package does not bundle or
-> invoke an external model; callers supply adapters when specialist execution is required.
+> **Status:** alpha (`0.6.0 — Client Reporting`). Evidence collection, deterministic checks, six evidence-bounded
+> specialist briefs, confirmed competitor collection, deterministic synthesis, and JSON, Markdown, accessible
+> HTML, and deterministic PDF reporting are functional. The package does not bundle or invoke an external model;
+> callers supply adapters when specialist execution is required.
 
 ## Why this project exists
 
@@ -29,7 +29,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 |
 | Security and packaging | 0.4.0 | Complete | 2026-09-18 |
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 |
-| Client reporting | 0.6.0 | Planned | — |
+| Client reporting | 0.6.0 | Complete | 2026-09-18 |
 | Extended capabilities | 0.7.0–0.8.0 | Planned | — |
 | Public beta | 0.9.0 | Planned | — |
 | Stable release | 1.0.0 | Planned | — |
@@ -53,6 +53,8 @@ Run an audit:
 svgai-marketing audit https://example.com --format markdown
 svgai-marketing audit https://example.com --format json --output .audit/example.json
 svgai-marketing audit https://example.com --browser-fallback
+svgai-marketing audit https://example.com --format html --output report.html
+svgai-marketing audit https://example.com --format pdf --output report.pdf
 svgai-marketing audit https://example.com --audience "Operations leaders" --offer "Demo"
 svgai-marketing audit https://example.com --competitor https://competitor.example --comparison-dimension positioning --confirm-competitors
 ```
@@ -112,10 +114,13 @@ evidence rather than browsing independently.
 - Confirmed competitor collection under the same bounded policy, with comparable states and retrieval provenance
 - Concurrent caller-supplied specialist adapters with schema validation and isolated failure recording
 - Deterministic score synthesis from bounded dimension ratings; agents never calculate canonical scores
+- Self-contained, escaped, accessible, print-ready HTML reports with configurable branding
+- Deterministic multi-page PDF reports with repeated headers, footers, page numbers, and wrapping content
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
-[security](docs/security.md), and [development](docs/development.md).
+[client reporting](docs/client-reporting.md), [security](docs/security.md), and
+[development](docs/development.md).
 
 ## Important limitations
 

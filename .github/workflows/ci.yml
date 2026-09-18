@@ -44,3 +44,5 @@ jobs:
       - run: .package-smoke/bin/svgai-marketing --help
       - run: .package-smoke/bin/python -m pip install ".[browser]"
       - run: .package-smoke/bin/python -c "from playwright.sync_api import sync_playwright; assert sync_playwright"
+      - run: .package-smoke/bin/python -m pip install ".[reports]"
+      - run: .package-smoke/bin/python -c "from reportlab.pdfgen import canvas; assert canvas"
