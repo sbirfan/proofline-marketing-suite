@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.2.0 — Evidence Engine`). Public-page evidence collection, recursive sitemap discovery,
-> structured robots analysis, visibility-aware HTML extraction, deterministic findings, partial scoring, and
-> JSON/Markdown reporting are functional. Multi-page audit scheduling, competitor research, and full specialist
-> synthesis remain roadmap work.
+> **Status:** alpha (`0.3.0 — Technical Audit`). Evidence collection, structured robots and sitemap analysis,
+> expanded deterministic technical checks, explicit score rules, constrained technical-agent briefs, and
+> prioritized JSON/Markdown reporting are functional. Multi-page scheduling, live specialist execution,
+> competitor research, and complete six-category scoring remain roadmap work.
 
 ## Why this project exists
 
@@ -26,8 +26,12 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 |---|---|---|---|
 | Foundation | 0.1.0 | Complete | 2026-09-18 |
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 |
-| Technical Audit | 0.3.0 | Planned | — |
+| Technical Audit | 0.3.0 | Complete | 2026-09-18 |
+| Security and packaging | 0.4.0 | Planned | — |
 | Full Marketing Audit | 0.5.0 | Planned | — |
+| Client reporting | 0.6.0 | Planned | — |
+| Extended capabilities | 0.7.0–0.8.0 | Planned | — |
+| Public beta | 0.9.0 | Planned | — |
 | Stable release | 1.0.0 | Planned | — |
 
 The detailed, dated record of what each phase built and deferred is maintained in
@@ -90,9 +94,12 @@ evidence rather than browsing independently.
 - Page language, visible word counts, internal/external link classification, link text, and form requirements
 - Deterministic checks for titles, descriptions, headings, indexability, canonicals, image alternatives,
   structured data, Open Graph metadata, and conversion actions
-- Versioned JSON schemas and 0–100 category scores
+- Deterministic checks for thin visible content, form friction, generic actions, link availability, robots access,
+  sitemap outcomes, and malformed structured data
+- Versioned agent brief/result contracts that exclude raw webpage text from specialist hand-offs
+- Versioned JSON schemas and explicit finding-ID rules for 0–100 category scores
 - Confidence and evidence coverage distinct from score
-- JSON and Markdown output
+- Prioritized JSON and Markdown output with evidence-availability and methodology sections
 - Prompt-injection boundaries in the audit skill and every specialist agent
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
@@ -104,7 +111,8 @@ The current release analyzes one target page while using robots.txt and sitemaps
 does not yet schedule an audit of every discovered page. It detects likely app shells and can render them when
 `--browser-fallback` is requested and optional Playwright support is installed. Competitive and growth scores
 remain `not_tested` until relevant evidence exists. A partial overall score covers tested categories only and
-is labeled accordingly.
+is labeled accordingly. The technical-agent brief is a safe hand-off contract; the Python CLI does not invoke
+an external language model.
 
 Audit output is decision support, not a guarantee of search rankings, accessibility compliance, privacy
 compliance, or revenue impact. Manually verify client-facing claims.

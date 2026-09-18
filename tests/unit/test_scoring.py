@@ -31,7 +31,7 @@ def test_blocked_fetch_never_becomes_a_score() -> None:
 
 def test_untested_categories_are_not_imputed() -> None:
     finding = Finding(
-        id="seo.example",
+        id="seo.title.missing",
         category="seo",
         severity=Severity.HIGH,
         claim="Example",
@@ -41,9 +41,24 @@ def test_untested_categories_are_not_imputed() -> None:
     categories, overall, _, coverage, status = calculate_scores(
         evidence(ObservationStatus.OBSERVED), [finding]
     )
-    assert categories["seo"].score == 78
+    assert categories["seo"].score == 80
     assert categories["competitive"].score is None
     assert categories["growth"].status == "not_tested"
     assert overall is not None
-    assert coverage == 0.75
+    assert coverage == 0.55
     assert status == "partial"
+
+
+def test_unregistered_finding_cannot_silently_change_score() -> None:
+    finding = Finding(
+        id="seo.future_rule",
+        category="seo",
+        severity=Severity.CRITICAL,
+        claim="A future rule",
+        evidence=[],
+        confidence=1.0,
+    )
+
+    categories, _, _, _, _ = calculate_scores(evidence(ObservationStatus.OBSERVED), [finding])
+
+    assert categories["seo"].score == 100
