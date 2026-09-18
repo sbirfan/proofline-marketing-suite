@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "svgai-marketing-suite"
-version = "0.5.0"
+version = "0.6.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,13 +23,17 @@ dependencies = []
 
 [project.optional-dependencies]
 browser = ["playwright>=1.48"]
+reports = ["reportlab>=4.2,<5"]
 dev = [
   "build>=1.2",
   "jsonschema>=4.23",
   "mypy>=1.13",
+  "pypdf>=5.1",
   "pytest>=8.3",
   "pytest-cov>=6.0",
+  "reportlab>=4.2,<5",
   "ruff>=0.8",
+  "types-reportlab>=4.2",
 ]
 
 [project.scripts]
@@ -48,8 +52,11 @@ exclude = [
   "/.venv",
   "/build",
   "/build-env-*",
+  "/build-requirements-*.txt",
+  "/build-via-sdist-*",
   "/dist",
   "/pip-*",
+  "/pytest-of-root",
   "/tmp*",
 ]
 

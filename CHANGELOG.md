@@ -4,6 +4,20 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-18
+
+### Added
+
+- Accessible, responsive, print-ready HTML reports with escaped untrusted values and configurable branding
+- Deterministic PDF renderer with repeated headers, footers, page numbers, tables, wrapping URLs, and sparse states
+- `reports` optional dependency, installed-wheel CI smoke check, and synthetic multi-page visual regression example
+- Client-reporting guide and HTML/PDF renderer regression tests
+
+### Changed
+
+- CLI now supports `--format html` and `--format pdf`; PDF output requires an explicit file path
+- Package and plugin versions advanced to 0.6.0
+
 ## [0.5.0] - 2026-09-18
 
 ### Added

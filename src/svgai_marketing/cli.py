@@ -8,7 +8,7 @@ from pathlib import Path
 
 from .models import BusinessContext
 from .orchestrator import run_audit
-from .reporting.markdown import render_markdown
+from .reporting import render_html, render_markdown, render_pdf
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -16,7 +16,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
     audit = sub.add_parser("audit", help="Audit a public webpage")
     audit.add_argument("url")
-    audit.add_argument("--format", choices=("json", "markdown"), default="markdown")
+    audit.add_argument("--format", choices=("json", "markdown", "html", "pdf"), default="markdown")
     audit.add_argument("--output", type=Path)
     audit.add_argument("--timeout", type=float, default=15.0)
     audit.add_argument(
@@ -57,11 +57,17 @@ def main(argv: list[str] | None = None) -> int:
         browser_fallback=args.browser_fallback,
         business_context=context,
     )
-    body = (
-        json.dumps(result.to_dict(), indent=2, ensure_ascii=False)
-        if args.format == "json"
-        else render_markdown(result)
-    )
+    if args.format == "pdf":
+        if not args.output:
+            raise SystemExit("--output is required for PDF reports")
+        render_pdf(result, args.output)
+        return 0 if result.status in {"complete", "partial"} else 1
+    if args.format == "json":
+        body = json.dumps(result.to_dict(), indent=2, ensure_ascii=False)
+    elif args.format == "html":
+        body = render_html(result)
+    else:
+        body = render_markdown(result)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(body + "\n", encoding="utf-8")

@@ -24,7 +24,10 @@ output/
 tmp/
 pip-build-env-*/
 /build-env-*/
+/build-requirements-*.txt
+/build-via-sdist-*/
 /pip-*/
+/pytest-of-root/
 /tmp*
 
 # Editors and operating systems
