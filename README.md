@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.6.0 — Client Reporting`). Evidence collection, deterministic checks, six evidence-bounded
-> specialist briefs, confirmed competitor collection, deterministic synthesis, and JSON, Markdown, accessible
-> HTML, and deterministic PDF reporting are functional. The package does not bundle or invoke an external model;
-> callers supply adapters when specialist execution is required.
+> **Status:** alpha (`0.7.0 — Analysis Capabilities`). Evidence collection, deterministic checks, six specialist
+> briefs, confirmed competitor collection, deterministic synthesis, four report formats, and task-specific SEO,
+> landing, competitor, brand, funnel, and report skills are functional. The package does not bundle or invoke an
+> external model; callers supply adapters when specialist execution is required.
 
 ## Why this project exists
 
@@ -30,7 +30,8 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Security and packaging | 0.4.0 | Complete | 2026-09-18 |
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 |
 | Client reporting | 0.6.0 | Complete | 2026-09-18 |
-| Extended capabilities | 0.7.0–0.8.0 | Planned | — |
+| Analysis capabilities | 0.7.0 | Complete | 2026-09-18 |
+| Campaign capabilities | 0.8.0 | Planned | — |
 | Public beta | 0.9.0 | Planned | — |
 | Stable release | 1.0.0 | Planned | — |
 
@@ -82,6 +83,12 @@ Then use:
 ```text
 /svgai-marketing:health
 /svgai-marketing:audit example.com
+/svgai-marketing:seo example.com
+/svgai-marketing:landing example.com
+/svgai-marketing:competitors example.com
+/svgai-marketing:brand example.com
+/svgai-marketing:funnel example.com
+/svgai-marketing:report .audit/example.json
 ```
 
 Plugin instructions treat all retrieved material as untrusted evidence. Specialist agents receive structured
@@ -116,11 +123,12 @@ evidence rather than browsing independently.
 - Deterministic score synthesis from bounded dimension ratings; agents never calculate canonical scores
 - Self-contained, escaped, accessible, print-ready HTML reports with configurable branding
 - Deterministic multi-page PDF reports with repeated headers, footers, page numbers, and wrapping content
+- Six focused analysis/report skills with shared evidence, source, limitation, and recommendation contracts
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
-[client reporting](docs/client-reporting.md), [security](docs/security.md), and
-[development](docs/development.md).
+[client reporting](docs/client-reporting.md), [security](docs/security.md),
+[skill catalog](docs/skills.md), and [development](docs/development.md).
 
 ## Important limitations
 

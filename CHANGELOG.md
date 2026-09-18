@@ -4,6 +4,19 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-09-18
+
+### Added
+
+- `/seo`, `/landing`, `/competitors`, `/brand`, `/funnel`, and `/report` Claude Code skills
+- Shared analysis-skill output schema for facts, interpretations, recommendations, limitations, and sources
+- Skill catalog and structural/safety regression tests
+
+### Changed
+
+- Release validation now requires every evidence-consuming skill to declare an untrusted-content boundary
+- README documents the expanded plugin command surface and split 0.7/0.8 capability phases
+
 ## [0.6.0] - 2026-09-18
 
 ### Added
