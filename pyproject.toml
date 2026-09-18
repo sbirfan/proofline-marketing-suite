@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "svgai-marketing-suite"
-version = "0.3.0"
+version = "0.4.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -24,6 +24,7 @@ dependencies = []
 [project.optional-dependencies]
 browser = ["playwright>=1.48"]
 dev = [
+  "build>=1.2",
   "jsonschema>=4.23",
   "mypy>=1.13",
   "pytest>=8.3",
@@ -36,6 +37,21 @@ svgai-marketing = "svgai_marketing.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/svgai_marketing"]
+
+[tool.hatch.build]
+exclude = [
+  "/.coverage",
+  "/.mypy_cache",
+  "/.package-smoke",
+  "/.pytest_cache",
+  "/.ruff_cache",
+  "/.venv",
+  "/build",
+  "/build-env-*",
+  "/dist",
+  "/pip-*",
+  "/tmp*",
+]
 
 [tool.pytest.ini_options]
 addopts = "-q --strict-markers"
