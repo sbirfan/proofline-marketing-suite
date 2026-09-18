@@ -1,0 +1,8 @@
+{
+  "schema_version": "2.0",
+  "target_url": "https://example.test/",
+  "fetch": {"url": "https://example.test/", "status": "blocked", "retrieved_at": "2026-09-18T00:00:00+00:00", "http_status": null, "final_url": null, "content_type": null, "content_length": null, "encoding": null, "reason": "non_public_address", "render_mode": "static", "confidence": 1.0, "elapsed_ms": null, "redirect_chain": ["https://example.test/"]},
+  "page": null,
+  "robots": {"resource": "robots", "status": "not_tested", "search_engine_access": "unknown", "sitemaps": [], "groups": [], "body_sha256": null, "line_count": 0},
+  "sitemap": {"resource": "sitemap", "status": "not_tested", "reason": null, "search_engine_access": "unknown", "urls": [], "url_count": 0, "resources": [], "sitemap_count": 0, "truncated": false, "limits": {"max_depth": 3, "max_sitemaps": 20, "max_urls": 1000}}
+}

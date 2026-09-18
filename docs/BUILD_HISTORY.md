@@ -15,7 +15,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Client reporting | 0.6.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/client-reporting` |
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/analysis-capabilities` |
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/campaign-capabilities` |
-| Public beta | 0.9.0 | Planned | — | — | To be scoped |
+| Public beta | 0.9.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/public-beta` |
 | Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
 
 ## Phase 0.1.0 — Foundation
@@ -251,6 +251,31 @@ Still deferred to later phases:
 
 - Provider-specific publishing adapters
 - Live account mutation, budget changes, list uploads, and CRM updates
+
+## Phase 0.9.0 — Public Beta
+
+Completed on 2026-09-18.
+
+Built:
+
+- Secret-free `doctor` diagnostics with human-readable and JSON output for version, Python support, platform,
+  and installed optional capabilities
+- Installed-wheel CI coverage for the diagnostic command
+- Synthetic observed and blocked evidence examples using reserved `.test` URLs
+- Machine-checkable skill-routing evaluation cases covering expected invocation and refusal of unapproved
+  sending, launching, and live-account mutation
+- Release checks for unique evaluation IDs, valid skill references, example structure, and synthetic-data scope
+- Public-beta compatibility, optional-extra, reproduction, and support-request guidance
+
+Quality record at phase completion:
+
+- All standard local gates, distribution builds, clean-wheel smoke checks, GitHub CI, and CodeQL are required
+- Diagnostic output is deliberately bounded to non-secret runtime capability data
+
+Still deferred to the stable release:
+
+- Long-term compatibility and deprecation policy
+- Stable support policy, migration guide, and 1.0 release notes
 
 ## Maintenance rule
 
