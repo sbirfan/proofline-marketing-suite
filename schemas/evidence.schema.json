@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://svgai.example/schemas/evidence.schema.json",
+  "title": "Evidence Document",
+  "type": "object",
+  "required": ["schema_version", "target_url", "fetch", "robots", "sitemap"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "target_url": { "type": "string", "format": "uri" },
+    "fetch": { "$ref": "#/$defs/fetch" },
+    "page": { "type": ["object", "null"] },
+    "robots": { "type": "object" },
+    "sitemap": { "type": "object" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "status": {
+      "enum": ["observed", "not_found", "blocked", "fetch_failed", "render_required", "not_tested", "unknown"]
+    },
+    "fetch": {
+      "type": "object",
+      "required": ["url", "status", "retrieved_at", "render_mode", "confidence"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "status": { "$ref": "#/$defs/status" },
+        "retrieved_at": { "type": "string", "format": "date-time" },
+        "http_status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "final_url": { "type": ["string", "null"] },
+        "content_type": { "type": ["string", "null"] },
+        "reason": { "type": ["string", "null"] },
+        "render_mode": { "enum": ["static", "browser"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "elapsed_ms": { "type": ["integer", "null"], "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+
