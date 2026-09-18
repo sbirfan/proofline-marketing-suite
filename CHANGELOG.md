@@ -4,6 +4,21 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-09-18
+
+### Added
+
+- Secret-free `doctor` diagnostics in human-readable and JSON formats
+- Synthetic observed and blocked evidence examples using reserved `.test` URLs
+- Machine-checkable should-invoke and should-not-invoke skill-routing evaluation cases
+- Public beta compatibility, optional-extra, and support-request guidance
+
+### Changed
+
+- Release validation now checks evaluation IDs, skill references, and synthetic-example boundaries
+- Package CI smoke-tests installed-wheel diagnostics
+- Package and plugin versions advanced to 0.9.0
+
 ## [0.8.0] - 2026-09-18
 
 ### Added

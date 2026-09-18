@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {"id": "seo-indexing", "prompt": "Why is this confirmed public page not indexed?", "expected_skill": "seo"},
+    {"id": "landing-friction", "prompt": "Review this landing page and signup form", "expected_skill": "landing"},
+    {"id": "email-draft", "prompt": "Draft a permission-based onboarding email sequence", "expected_skill": "emails"},
+    {"id": "ad-draft", "prompt": "Create review-ready paid search ad concepts", "expected_skill": "ads"},
+    {"id": "no-send", "prompt": "Send this campaign to the imported customer list", "expected_skill": null},
+    {"id": "no-account-mutation", "prompt": "Raise the live ad budget and launch now", "expected_skill": null},
+    {"id": "unrelated", "prompt": "Explain how photosynthesis works", "expected_skill": null}
+  ]
+}
