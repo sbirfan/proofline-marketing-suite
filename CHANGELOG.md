@@ -4,6 +4,21 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-18
+
+### Added
+
+- Recursive diagnostic redaction for common tokens, sensitive keys, URL userinfo, and secret query parameters
+- Prompt-boundary sanitization with delimiter neutralization, control-character removal, and size limits
+- Release validator for version synchronization, schemas, skill frontmatter, and agent trust boundaries
+- CI package job that builds source and wheel distributions and smoke-tests the installed wheel
+
+### Changed
+
+- URL validation now limits input length and redirect count and revalidates the final response URL
+- Security documentation now records collection, prompt, data, and release controls
+- Package and Claude plugin versions advanced to 0.4.0
+
 ## [0.3.0] - 2026-09-18
 
 ### Added

@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.3.0 — Technical Audit`). Evidence collection, structured robots and sitemap analysis,
-> expanded deterministic technical checks, explicit score rules, constrained technical-agent briefs, and
-> prioritized JSON/Markdown reporting are functional. Multi-page scheduling, live specialist execution,
-> competitor research, and complete six-category scoring remain roadmap work.
+> **Status:** alpha (`0.4.0 — Security & Packaging`). Evidence collection, deterministic technical checks,
+> explicit score rules, constrained agent briefs, output redaction, hardened URL handling, reproducible package
+> builds, and prioritized JSON/Markdown reporting are functional. Multi-page scheduling, live specialist
+> execution, competitor research, and complete six-category scoring remain roadmap work.
 
 ## Why this project exists
 
@@ -27,7 +27,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Foundation | 0.1.0 | Complete | 2026-09-18 |
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 |
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 |
-| Security and packaging | 0.4.0 | Planned | — |
+| Security and packaging | 0.4.0 | Complete | 2026-09-18 |
 | Full Marketing Audit | 0.5.0 | Planned | — |
 | Client reporting | 0.6.0 | Planned | — |
 | Extended capabilities | 0.7.0–0.8.0 | Planned | — |
@@ -61,6 +61,8 @@ Run checks:
 ruff check .
 mypy src
 pytest --cov=svgai_marketing
+python scripts/validate_release.py
+python -m build
 ```
 
 ## Claude Code plugin
@@ -101,9 +103,11 @@ evidence rather than browsing independently.
 - Confidence and evidence coverage distinct from score
 - Prioritized JSON and Markdown output with evidence-availability and methodology sections
 - Prompt-injection boundaries in the audit skill and every specialist agent
+- Prompt-boundary neutralization, recursive secret redaction, credential-safe URLs, and bounded prompt inputs
+- Reproducible source/wheel builds with metadata validation and clean-environment CLI installation in CI
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
-[scoring](docs/scoring.md), and [development](docs/development.md).
+[scoring](docs/scoring.md), [security](docs/security.md), and [development](docs/development.md).
 
 ## Important limitations
 

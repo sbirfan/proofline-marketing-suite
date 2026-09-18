@@ -1,7 +1,7 @@
 from email.message import Message
 from urllib.error import HTTPError
 
-from svgai_marketing.crawler.http import SafeHttpClient
+from svgai_marketing.crawler.http import SafeHttpClient, validate_public_url
 from svgai_marketing.models import ObservationStatus
 
 
@@ -126,3 +126,27 @@ def test_declared_oversized_response_is_rejected_before_read() -> None:
     assert result.observation.status is ObservationStatus.FETCH_FAILED
     assert result.observation.reason == "response_too_large"
     assert result.observation.content_length == 1_000
+
+
+def test_custom_opener_cannot_bypass_final_url_validation() -> None:
+    client = SafeHttpClient(
+        opener=StaticOpener(FakeResponse("http://127.0.0.1/admin", b"private")),
+        resolver=lambda *args, **kwargs: [
+            (2, 1, 6, "", ("93.184.216.34", 443)),
+        ],
+    )
+
+    result = client.fetch("https://example.test/")
+
+    assert result.observation.status is ObservationStatus.BLOCKED
+    assert result.observation.reason == "non_public_address"
+
+
+def test_control_characters_and_oversized_urls_are_rejected() -> None:
+    for url in ("https://example.com/\nheader", "https://example.com/" + "x" * 8_200):
+        try:
+            validate_public_url(url)
+        except ValueError as error:
+            assert str(error) == "invalid_url"
+        else:
+            raise AssertionError("unsafe URL accepted")
