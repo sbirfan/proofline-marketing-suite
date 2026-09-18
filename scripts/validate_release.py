@@ -19,6 +19,11 @@ def main() -> int:
     match = re.search(r'^__version__ = "([^"]+)"$', package, re.MULTILINE)
     assert match, "package version is missing"
     assert manifest["version"] == expected == match.group(1), "release versions differ"
+    if expected.startswith("1."):
+        classifiers = project["project"]["classifiers"]
+        assert "Development Status :: 5 - Production/Stable" in classifiers
+        for relative in ("docs/support.md", "docs/migration.md", "docs/release-notes-1.0.md"):
+            assert (ROOT / relative).is_file(), f"stable release document missing: {relative}"
 
     skills = list((ROOT / "skills").glob("*/SKILL.md"))
     agents = list((ROOT / "agents").glob("*.md"))

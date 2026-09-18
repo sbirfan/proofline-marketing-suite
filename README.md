@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** public beta (`0.9.0`). The suite now includes evidence-backed audit, analysis,
+> **Status:** stable (`1.0.0`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -33,7 +33,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 |
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 |
 | Public beta | 0.9.0 | Complete | 2026-09-18 |
-| Stable release | 1.0.0 | Planned | — |
+| Stable release | 1.0.0 | Complete | 2026-09-18 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -140,7 +140,8 @@ See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.m
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
 [client reporting](docs/client-reporting.md), [security](docs/security.md),
 [skill catalog](docs/skills.md), [public beta guide](docs/public-beta.md), and
-[development](docs/development.md).
+[support policy](docs/support.md), [migration guide](docs/migration.md),
+[1.0 release notes](docs/release-notes-1.0.md), and [development](docs/development.md).
 
 ## Important limitations
 
