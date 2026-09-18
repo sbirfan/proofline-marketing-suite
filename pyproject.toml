@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "svgai-marketing-suite"
-version = "0.6.0"
+version = "0.7.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -29,6 +29,7 @@ dev = [
   "jsonschema>=4.23",
   "mypy>=1.13",
   "pypdf>=5.1",
+  "PyYAML>=6.0",
   "pytest>=8.3",
   "pytest-cov>=6.0",
   "reportlab>=4.2,<5",

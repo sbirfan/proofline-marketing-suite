@@ -13,6 +13,8 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Security and packaging | 0.4.1 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/full-marketing-audit` |
 | Client reporting | 0.6.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/client-reporting` |
+| Analysis capabilities | 0.7.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/analysis-capabilities` |
+| Campaign capabilities | 0.8.0 | Planned | — | — | To be scoped |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
 | Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
 
@@ -198,6 +200,31 @@ Still deferred to later phases:
 
 - Rich charts and benchmark visualizations
 - Hosted report delivery and authenticated client portals
+
+## Phase 0.7.0 — Analysis Capabilities
+
+Completed on 2026-09-18.
+
+Built:
+
+- Focused `/seo`, `/landing`, `/competitors`, `/brand`, `/funnel`, and `/report` Claude Code skills
+- Explicit invocation boundaries and required context for search, conversion, comparison, trust, journey, and
+  reporting requests
+- Shared structured output contract that separates facts, interpretations, recommendations, limitations, and
+  timestamped sources
+- Central untrusted-evidence requirements, missing-context behavior, canonical-score protection, and
+  unsupported-lift/revenue restrictions across every new skill
+- Skill catalog, folder/frontmatter validation, evidence-boundary checks, and JSON Schema validation
+
+Quality record at phase completion:
+
+- All standard local gates, package builds, installed extras, GitHub CI, and CodeQL are required
+- Every new skill is validated with the skill-creator quick validator
+
+Still deferred to later phases:
+
+- Campaign asset generation for copy, email, social, ads, launches, and proposals
+- Hosted delivery, provider-specific publishing, and external account mutations
 
 ## Maintenance rule
 
