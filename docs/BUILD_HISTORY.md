@@ -9,7 +9,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 |---|---|---|---|---|---|
 | Foundation | 0.1.0 | Complete | 2026-09-18 | 2026-09-18 | PR #1, commit `652f82b6` |
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/evidence-engine` |
-| Technical Audit | 0.3.0 | Planned | — | — | EPICs 07–09 and 15–17 |
+| Technical Audit | 0.3.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/technical-audit` |
 | Security and packaging | 0.4.0 | Planned | — | — | EPICs 18–19 |
 | Full Marketing Audit | 0.5.0 | Planned | — | — | EPICs 10–14 |
 | Client reporting | 0.6.0 | Planned | — | — | EPIC 16 |
@@ -78,8 +78,40 @@ Still deferred to later phases:
 - Agent execution and synthesis inside the orchestrator
 - Full six-category score coverage
 
+## Phase 0.3.0 — Technical Audit
+
+Completed on 2026-09-18.
+
+Built:
+
+- Expanded deterministic SEO, content, conversion, brand, robots, and sitemap findings with stable IDs
+- Explicit score version `3.0`, finding-ID penalties, category-specific evidence coverage, and deterministic
+  behavior for unregistered future findings
+- Structured technical-agent briefs that contain finding IDs, evidence URLs, limitations, prohibited actions,
+  and the shared untrusted-content policy without raw webpage text
+- JSON schemas for specialist-agent briefs and specialist-agent results
+- Audit result provenance for both schema version and score version
+- Severity-prioritized Markdown findings plus evidence-availability and scoring-methodology sections
+- Regression tests for new checks, blocked-versus-missing sitemap semantics, score rules, and agent briefs
+
+Quality record at phase completion:
+
+- Ruff formatting and lint: passed
+- Strict mypy: passed
+- Pytest: 29 passed, including JSON Schema contract validation
+- Total local coverage: 84%
+- GitHub CI: required before merge on Linux, macOS, and Windows
+
+Still deferred to later phases:
+
+- External language-model invocation from the Python runtime
+- Complete accessibility, measurement, broken-link, performance, and consent analysis
+- Content, conversion, competitive, brand, and growth specialist synthesis
+- HTML and PDF report rendering
+
 ## Maintenance rule
 
 Every phase pull request must update this file, the README capability/limitation sections, the changelog, and
 the package/plugin version when applicable. A phase is marked complete only after local quality gates and the
-configured GitHub CI pass.
+configured GitHub CI pass. The feature PR is then merged to `develop`, post-merge CI is verified, and the
+release PR is merged to `main` before work begins on the next phase.
