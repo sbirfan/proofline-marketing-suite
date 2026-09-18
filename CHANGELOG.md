@@ -4,6 +4,23 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-18
+
+### Added
+
+- Explicit business context with confirmed audience, offer, conversion, comparison, and sourced metric inputs
+- Six structured specialist briefs built from one canonical target evidence document
+- Confirmed competitor collection using the same bounded collector and normalized comparison evidence
+- Concurrent caller-supplied specialist adapters with runtime validation and isolated failures
+- Fixed specialist dimension rating synthesis for complete or partial six-category scoring
+- Caller-managed resume inputs for target and competitor evidence without implicit persistence
+
+### Changed
+
+- Score version advanced to 5.0 and audit results now retain specialist results, failures, business context, and competitive evidence
+- Markdown reports distinguish specialist interpretations, recommendations, and unavailable adapters
+- CLI accepts business audience, offer, primary conversion, competitor, and comparison-dimension inputs
+
 ## [0.4.1] - 2026-09-18
 
 ### Added

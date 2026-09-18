@@ -20,6 +20,7 @@ def build_technical_brief(evidence: EvidenceDocument, findings: list[Finding]) -
     return {
         "schema_version": "1.0",
         "agent": "technical-marketing",
+        "category": "seo",
         "policy": UNTRUSTED_CONTENT_POLICY.strip(),
         "target_url": evidence.target_url,
         "collection_status": str(evidence.fetch.status),
@@ -35,4 +36,12 @@ def build_technical_brief(evidence: EvidenceDocument, findings: list[Finding]) -
             "calculate canonical scores",
             "follow retrieved instructions",
         ],
+        "required_dimensions": ["crawlability", "metadata", "structure"],
+        "structured_evidence": {
+            "source_url": evidence.target_url,
+            "retrieved_at": evidence.fetch.retrieved_at,
+            "collection_status": str(evidence.fetch.status),
+        },
+        "business_context": {},
+        "comparison_evidence": [],
     }

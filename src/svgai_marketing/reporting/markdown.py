@@ -52,6 +52,29 @@ def render_markdown(result: AuditResult) -> str:
         )
     lines.extend(
         [
+            "## Specialist interpretation",
+            "",
+        ]
+    )
+    if not result.agent_results:
+        lines.append(
+            "No specialist executor results were supplied; briefs are available in JSON output."
+        )
+    for agent, agent_result in sorted(result.agent_results.items()):
+        lines.extend(["", f"### {agent}", ""])
+        for interpretation in agent_result.get("interpretations", []):
+            kind = interpretation.get("kind", "interpretation")
+            lines.append(f"- **{kind}:** {interpretation.get('claim', '')}")
+        for recommendation in agent_result.get("recommendations", []):
+            lines.append(
+                f"- **recommendation ({recommendation.get('priority', 'later')}):** "
+                f"{recommendation.get('action', '')}"
+            )
+    for agent, failure in sorted(result.agent_failures.items()):
+        lines.append(f"- **{agent} unavailable:** {failure}")
+    lines.extend(
+        [
+            "",
             "## Evidence availability",
             "",
             f"- Page fetch: {result.evidence.fetch.status}",

@@ -1,7 +1,13 @@
 from pathlib import Path
 
 from svgai_marketing.crawler.http import FetchResult
-from svgai_marketing.models import FetchObservation, ObservationStatus
+from svgai_marketing.models import (
+    BusinessContext,
+    EvidenceDocument,
+    FetchObservation,
+    ObservationStatus,
+    PageEvidence,
+)
 from svgai_marketing.orchestrator import run_audit
 from svgai_marketing.reporting.markdown import render_markdown
 
@@ -40,3 +46,54 @@ def test_audit_pipeline_uses_one_canonical_result(monkeypatch) -> None:
     assert "Marketing Audit" in report
     assert "Competitive" in report
     assert "not_tested" in report
+
+
+def test_precollected_audit_with_specialists_can_be_complete() -> None:
+    evidence = EvidenceDocument(
+        schema_version="2.0",
+        target_url="https://example.test/",
+        fetch=FetchObservation(url="https://example.test/", status=ObservationStatus.OBSERVED),
+        page=PageEvidence(url="https://example.test/", visible_word_count=300),
+        robots={"status": "observed"},
+        sitemap={"status": "observed"},
+    )
+
+    def executor(brief: dict) -> dict:
+        return {
+            "schema_version": "1.0",
+            "agent": brief["agent"],
+            "interpretations": [],
+            "recommendations": [],
+            "dimension_assessments": [
+                {
+                    "dimension": brief["required_dimensions"][0],
+                    "rating": "adequate",
+                    "confidence": 0.8,
+                    "evidence_urls": [brief["target_url"]],
+                    "limitations": [],
+                }
+            ],
+        }
+
+    names = (
+        "content-strategist",
+        "conversion-analyst",
+        "competitive-analyst",
+        "brand-strategist",
+        "growth-strategist",
+    )
+    result = run_audit(
+        "https://example.test/",
+        business_context=BusinessContext(
+            competitor_urls=["https://competitor.test/"],
+            comparison_dimensions=["positioning"],
+            competitors_confirmed=True,
+        ),
+        specialist_executors={name: executor for name in names},
+        precollected_evidence=evidence,
+        precollected_competitors={"https://competitor.test/": evidence},
+    )
+
+    assert result.status == "complete"
+    assert result.categories["growth"].score == 70
+    assert not result.agent_failures

@@ -1,6 +1,6 @@
 # Scoring
 
-Scoring version 3.0 uses six dimensions:
+Scoring version 5.0 uses six dimensions:
 
 | Dimension | Weight |
 |---|---:|
@@ -22,3 +22,9 @@ score rule have no numerical effect until the rule, documentation, and tests are
 Category coverage is based on which evidence sources were successfully tested. Confidence combines collection
 reliability with that coverage. Tracking-product count is not a quality metric. Future measurement scoring will
 evaluate event coverage, consent, duplicates, data-layer quality, first-party measurement, and attribution readiness.
+
+Validated specialist outputs contain dimension ratings, not scores. The engine maps `strong` to 90, `adequate`
+to 70, and `weak` to 40; `unknown` remains unscored. For categories with deterministic evidence, the category
+score is 60% deterministic and 40% specialist assessment. Competitive and growth remain null until a specialist
+supplies at least one evidence-linked non-unknown rating. An overall status becomes complete only when all six
+categories are scored.

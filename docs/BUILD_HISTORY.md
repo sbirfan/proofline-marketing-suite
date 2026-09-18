@@ -11,7 +11,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/evidence-engine` |
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/technical-audit` |
 | Security and packaging | 0.4.1 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
-| Full Marketing Audit | 0.5.0 | Planned | — | — | EPICs 10–14 |
+| Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/full-marketing-audit` |
 | Client reporting | 0.6.0 | Planned | — | — | EPIC 16 |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
 | Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
@@ -141,6 +141,35 @@ Still deferred to later phases:
 - External specialist-model execution
 - Signing or publishing packages to a public registry
 - HTML and PDF report rendering
+
+## Phase 0.5.0 — Full Marketing Audit
+
+Completed on 2026-09-18.
+
+Built:
+
+- Explicit, user-confirmed business context for audience, offer, primary conversion, competitors, comparison
+  dimensions, and sourced growth metrics
+- Six structured specialist briefs from one canonical target collection, with no raw webpage text in prompts
+- Comparable competitor evidence collected only from confirmed targets under the same bounded collector policy
+- Concurrent caller-supplied specialist execution with runtime result validation and per-agent failure isolation
+- Evidence-linked dimension assessments, interpretations, recommendations, test designs, and measurement needs
+- Score engine 5.0, which deterministically maps bounded specialist ratings and never lets agents calculate scores
+- Caller-managed resume inputs for approved caches without implicit client-data persistence
+- End-to-end partial and complete audit coverage plus hostile, sparse, missing-context, and adapter-failure cases
+
+Quality record at phase completion:
+
+- Ruff formatting and lint: required locally and in CI
+- Strict mypy: required locally and in CI
+- Pytest, coverage, JSON Schema, release validation, package build, wheel install, and browser-extra smoke: required
+- GitHub CI and CodeQL: required before both `develop` and `main` merges
+
+Still deferred to later phases:
+
+- Bundled external model credentials or provider-specific invocation
+- Crawl scheduling across every sitemap URL
+- Client-ready HTML and PDF report rendering
 
 ## Maintenance rule
 

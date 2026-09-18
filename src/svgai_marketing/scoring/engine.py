@@ -6,7 +6,7 @@ from collections import defaultdict
 
 from ..models import CategoryScore, EvidenceDocument, Finding, ObservationStatus
 
-SCORE_VERSION = "3.0"
+SCORE_VERSION = "5.0"
 CATEGORY_WEIGHTS = {
     "content": 0.25,
     "conversion": 0.20,
@@ -106,3 +106,63 @@ def calculate_scores(
     )
     confidence = round(collection_confidence * coverage, 2)
     return categories, overall, confidence, coverage, "partial"
+
+
+ASSESSMENT_VALUES = {"strong": 90.0, "adequate": 70.0, "weak": 40.0}
+AGENT_CATEGORIES = {
+    "content-strategist": "content",
+    "conversion-analyst": "conversion",
+    "competitive-analyst": "competitive",
+    "brand-strategist": "brand",
+    "growth-strategist": "growth",
+}
+
+
+def synthesize_specialist_scores(
+    categories: dict[str, CategoryScore],
+    agent_results: dict[str, dict[str, object]],
+) -> tuple[dict[str, CategoryScore], float | None, float, float, str]:
+    """Map bounded dimension ratings to canonical scores using fixed rules."""
+    synthesized = dict(categories)
+    for agent, category in AGENT_CATEGORIES.items():
+        raw = agent_results.get(agent, {}).get("dimension_assessments", [])
+        if not isinstance(raw, list):
+            continue
+        assessments = [item for item in raw if isinstance(item, dict)]
+        scored = [item for item in assessments if item.get("rating") in ASSESSMENT_VALUES]
+        if not scored:
+            continue
+        assessment_score = sum(ASSESSMENT_VALUES[str(item["rating"])] for item in scored) / len(
+            scored
+        )
+        specialist_confidence = sum(float(item["confidence"]) for item in scored) / len(scored)
+        assessment_coverage = len(scored) / len(assessments)
+        existing = synthesized[category]
+        score = assessment_score
+        coverage = assessment_coverage
+        confidence = specialist_confidence * coverage
+        if existing.score is not None:
+            score = existing.score * 0.6 + assessment_score * 0.4
+            coverage = min(1.0, existing.coverage * 0.6 + assessment_coverage * 0.4)
+            confidence = min(1.0, existing.confidence * 0.6 + specialist_confidence * 0.4)
+        synthesized[category] = CategoryScore(
+            round(score, 1), round(confidence, 2), round(coverage, 2)
+        )
+
+    tested = [name for name, value in synthesized.items() if value.score is not None]
+    if not tested:
+        return synthesized, None, 0.0, 0.0, "insufficient_evidence"
+    tested_weight = sum(CATEGORY_WEIGHTS[name] for name in tested)
+    overall = round(
+        sum((synthesized[name].score or 0.0) * CATEGORY_WEIGHTS[name] for name in tested)
+        / tested_weight,
+        1,
+    )
+    coverage = round(
+        sum(synthesized[name].coverage * CATEGORY_WEIGHTS[name] for name in synthesized), 2
+    )
+    confidence = round(
+        sum(synthesized[name].confidence * CATEGORY_WEIGHTS[name] for name in synthesized), 2
+    )
+    status = "complete" if len(tested) == len(CATEGORY_WEIGHTS) else "partial"
+    return synthesized, overall, confidence, coverage, status
