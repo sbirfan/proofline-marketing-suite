@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.4.0 — Security & Packaging`). Evidence collection, deterministic technical checks,
+> **Status:** alpha (`0.4.1 — Security & Packaging`). Evidence collection, deterministic technical checks,
 > explicit score rules, constrained agent briefs, output redaction, hardened URL handling, reproducible package
 > builds, and prioritized JSON/Markdown reporting are functional. Multi-page scheduling, live specialist
 > execution, competitor research, and complete six-category scoring remain roadmap work.
@@ -105,6 +105,7 @@ evidence rather than browsing independently.
 - Prompt-injection boundaries in the audit skill and every specialist agent
 - Prompt-boundary neutralization, recursive secret redaction, credential-safe URLs, and bounded prompt inputs
 - Reproducible source/wheel builds with metadata validation and clean-environment CLI installation in CI
+- Optional browser-extra smoke checks, CodeQL scanning, Dependabot updates, and checksummed tag artifacts
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [security](docs/security.md), and [development](docs/development.md).
