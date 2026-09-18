@@ -12,7 +12,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/technical-audit` |
 | Security and packaging | 0.4.1 | Complete | 2026-09-18 | 2026-09-18 | `feature/security-packaging` |
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/full-marketing-audit` |
-| Client reporting | 0.6.0 | Planned | — | — | EPIC 16 |
+| Client reporting | 0.6.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/client-reporting` |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
 | Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
 
@@ -170,6 +170,34 @@ Still deferred to later phases:
 - Bundled external model credentials or provider-specific invocation
 - Crawl scheduling across every sitemap URL
 - Client-ready HTML and PDF report rendering
+
+## Phase 0.6.0 — Client Reporting
+
+Completed on 2026-09-18.
+
+Built:
+
+- A self-contained semantic HTML renderer with escaped values, responsive layout, print styles, scoped table
+  headers, and configurable client branding
+- A deterministic ReportLab PDF renderer with page numbers, repeated page chrome, wrapping category tables,
+  long evidence URLs, sparse states, and stable metadata
+- HTML and PDF CLI formats, with explicit output paths required for binary PDF output
+- A `reports` optional dependency and clean installed-wheel import smoke check in CI
+- Regression tests for hostile values, accessibility primitives, long URLs, deterministic bytes, PDF page count,
+  text extraction, and page numbering
+- A multi-page synthetic report rendered through Poppler and visually inspected before release
+
+Quality record at phase completion:
+
+- Ruff, strict mypy, pytest, coverage, schema validation, and package validation: required locally and in CI
+- Source/wheel build, installed CLI, browser extra, and reports extra smoke checks: required in CI
+- GitHub CI and CodeQL: required on feature and release PRs
+- Latest PDF page images: required to show no clipping, overlap, broken tables, or unreadable content
+
+Still deferred to later phases:
+
+- Rich charts and benchmark visualizations
+- Hosted report delivery and authenticated client portals
 
 ## Maintenance rule
 
