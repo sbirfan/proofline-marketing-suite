@@ -25,7 +25,8 @@ def main() -> int:
     for path in [*skills, *agents]:
         content = path.read_text(encoding="utf-8")
         assert content.startswith("---\n"), f"{path} has no YAML frontmatter"
-    for path in [ROOT / "skills/audit/SKILL.md", *agents]:
+    evidence_skills = [path for path in skills if path.parent.name != "health"]
+    for path in [*evidence_skills, *agents]:
         content = path.read_text(encoding="utf-8")
         assert "untrusted" in content.casefold(), f"{path} has no untrusted-content boundary"
 
