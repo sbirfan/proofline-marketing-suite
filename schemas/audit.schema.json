@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://svgai.example/schemas/audit.schema.json",
+  "title": "Audit Result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "target_url",
+    "generated_at",
+    "evidence",
+    "findings",
+    "categories",
+    "overall",
+    "confidence",
+    "coverage",
+    "status"
+  ],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "target_url": { "type": "string", "format": "uri" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "evidence": { "$ref": "evidence.schema.json" },
+    "findings": { "type": "array", "items": { "$ref": "finding.schema.json" } },
+    "categories": {
+      "type": "object",
+      "required": ["content", "conversion", "seo", "competitive", "brand", "growth"],
+      "properties": {
+        "content": { "$ref": "score.schema.json" },
+        "conversion": { "$ref": "score.schema.json" },
+        "seo": { "$ref": "score.schema.json" },
+        "competitive": { "$ref": "score.schema.json" },
+        "brand": { "$ref": "score.schema.json" },
+        "growth": { "$ref": "score.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    "overall": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+    "status": { "enum": ["complete", "partial", "insufficient_evidence"] }
+  },
+  "additionalProperties": false
+}

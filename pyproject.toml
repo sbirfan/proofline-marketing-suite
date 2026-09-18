@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "svgai-marketing-suite"
+version = "0.2.0"
+description = "Evidence-first marketing audits for Claude Code"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Syed Irfan" }]
+keywords = ["marketing", "audit", "seo", "claude-code", "cro"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = []
+
+[project.optional-dependencies]
+browser = ["playwright>=1.48"]
+dev = [
+  "jsonschema>=4.23",
+  "mypy>=1.13",
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "ruff>=0.8",
+]
+
+[project.scripts]
+svgai-marketing = "svgai_marketing.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/svgai_marketing"]
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["pip-build-env-*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["svgai_marketing"]
