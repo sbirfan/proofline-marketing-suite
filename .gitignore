@@ -5,7 +5,9 @@ __pycache__/
 build/
 dist/
 .venv/
+.venv-broken-*/
 .package-smoke/
+.package-smoke-broken-*/
 venv/
 .pytest_cache/
 .mypy_cache/

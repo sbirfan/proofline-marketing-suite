@@ -12,7 +12,9 @@ def test_manifest_and_skill_frontmatter_exist() -> None:
 
 
 def test_skill_names_match_folders_and_analysis_boundaries() -> None:
-    expected = {"seo", "landing", "competitors", "brand", "funnel", "report"}
+    analysis = {"seo", "landing", "competitors", "brand", "funnel", "report"}
+    campaign = {"copy", "emails", "social", "ads", "launch", "proposal"}
+    expected = analysis | campaign
     found: set[str] = set()
     for skill in (ROOT / "skills").glob("*/SKILL.md"):
         content = skill.read_text(encoding="utf-8")
@@ -24,6 +26,11 @@ def test_skill_names_match_folders_and_analysis_boundaries() -> None:
             found.add(name)
             assert "untrusted evidence" in content.casefold()
             assert "evidence" in content.casefold()
+            if name in campaign:
+                assert (
+                    "explicit approval" in content.casefold()
+                    or "without approval" in content.casefold()
+                )
     assert found == expected
 
 

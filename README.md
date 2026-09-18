@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.7.0 — Analysis Capabilities`). Evidence collection, deterministic checks, six specialist
-> briefs, confirmed competitor collection, deterministic synthesis, four report formats, and task-specific SEO,
-> landing, competitor, brand, funnel, and report skills are functional. The package does not bundle or invoke an
-> external model; callers supply adapters when specialist execution is required.
+> **Status:** alpha (`0.8.0 — Campaign Capabilities`). The suite now includes evidence-backed audit, analysis,
+> reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
+> requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
+> external account without separate approval.
 
 ## Why this project exists
 
@@ -31,7 +31,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 |
 | Client reporting | 0.6.0 | Complete | 2026-09-18 |
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 |
-| Campaign capabilities | 0.8.0 | Planned | — |
+| Campaign capabilities | 0.8.0 | Complete | 2026-09-18 |
 | Public beta | 0.9.0 | Planned | — |
 | Stable release | 1.0.0 | Planned | — |
 
@@ -89,6 +89,12 @@ Then use:
 /svgai-marketing:brand example.com
 /svgai-marketing:funnel example.com
 /svgai-marketing:report .audit/example.json
+/svgai-marketing:copy
+/svgai-marketing:emails
+/svgai-marketing:social
+/svgai-marketing:ads
+/svgai-marketing:launch
+/svgai-marketing:proposal
 ```
 
 Plugin instructions treat all retrieved material as untrusted evidence. Specialist agents receive structured
@@ -124,6 +130,7 @@ evidence rather than browsing independently.
 - Self-contained, escaped, accessible, print-ready HTML reports with configurable branding
 - Deterministic multi-page PDF reports with repeated headers, footers, page numbers, and wrapping content
 - Six focused analysis/report skills with shared evidence, source, limitation, and recommendation contracts
+- Six review-only campaign skills with approved-claim tracking, assumptions, measurement, and approval gates
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
