@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.8.0 — Campaign Capabilities`). The suite now includes evidence-backed audit, analysis,
+> **Status:** public beta (`0.9.0`). The suite now includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -32,7 +32,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Client reporting | 0.6.0 | Complete | 2026-09-18 |
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 |
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 |
-| Public beta | 0.9.0 | Planned | — |
+| Public beta | 0.9.0 | Complete | 2026-09-18 |
 | Stable release | 1.0.0 | Planned | — |
 
 The detailed, dated record of what each phase built and deferred is maintained in
@@ -46,6 +46,7 @@ cd svgai-marketing-suite
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
+svgai-marketing doctor
 ```
 
 Run an audit:
@@ -69,6 +70,9 @@ pytest --cov=svgai_marketing
 python scripts/validate_release.py
 python -m build
 ```
+
+Public-beta compatibility, diagnostics, examples, and support-request guidance are documented in the
+[public beta guide](docs/public-beta.md).
 
 ## Claude Code plugin
 
@@ -135,7 +139,8 @@ evidence rather than browsing independently.
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
 [client reporting](docs/client-reporting.md), [security](docs/security.md),
-[skill catalog](docs/skills.md), and [development](docs/development.md).
+[skill catalog](docs/skills.md), [public beta guide](docs/public-beta.md), and
+[development](docs/development.md).
 
 ## Important limitations
 

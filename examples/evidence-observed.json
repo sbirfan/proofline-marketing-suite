@@ -1,0 +1,8 @@
+{
+  "schema_version": "2.0",
+  "target_url": "https://example.test/",
+  "fetch": {"url": "https://example.test/", "status": "observed", "retrieved_at": "2026-09-18T00:00:00+00:00", "http_status": 200, "final_url": "https://example.test/", "content_type": "text/html", "content_length": 512, "encoding": "utf-8", "reason": null, "render_mode": "static", "confidence": 1.0, "elapsed_ms": 42, "redirect_chain": ["https://example.test/"]},
+  "page": {"url": "https://example.test/", "language": "en", "title": "Synthetic Example", "meta_description": "Synthetic evidence used for contract validation.", "canonical": "https://example.test/", "robots_meta": [], "headings": {"h1": ["Synthetic Example"]}, "links": [], "images": [], "forms": [], "buttons": [], "json_ld": [], "open_graph": {}, "visible_text": "Synthetic example content.", "visible_word_count": 3, "tracking_indicators": [], "render_required_reasons": []},
+  "robots": {"resource": "robots", "status": "not_tested", "search_engine_access": "unknown", "sitemaps": [], "groups": [], "body_sha256": null, "line_count": 0},
+  "sitemap": {"resource": "sitemap", "status": "not_tested", "reason": null, "search_engine_access": "unknown", "urls": [], "url_count": 0, "resources": [], "sitemap_count": 0, "truncated": false, "limits": {"max_depth": 3, "max_sitemaps": 20, "max_urls": 1000}}
+}

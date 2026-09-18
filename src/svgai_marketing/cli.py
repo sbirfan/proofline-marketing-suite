@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .diagnostics import collect_diagnostics, render_diagnostics
 from .models import BusinessContext
 from .orchestrator import run_audit
 from .reporting import render_html, render_markdown, render_pdf
@@ -14,6 +15,8 @@ from .reporting import render_html, render_markdown, render_pdf
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="svgai-marketing")
     sub = parser.add_subparsers(dest="command", required=True)
+    doctor = sub.add_parser("doctor", help="Report local runtime and optional capabilities")
+    doctor.add_argument("--json", action="store_true", help="Emit machine-readable diagnostics")
     audit = sub.add_parser("audit", help="Audit a public webpage")
     audit.add_argument("url")
     audit.add_argument("--format", choices=("json", "markdown", "html", "pdf"), default="markdown")
@@ -41,6 +44,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "doctor":
+        report = collect_diagnostics()
+        print(render_diagnostics(report, as_json=args.json))
+        return 0 if report.healthy else 1
     if args.command != "audit":
         return 2
     context = BusinessContext(

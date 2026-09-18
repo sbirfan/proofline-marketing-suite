@@ -34,6 +34,25 @@ def main() -> int:
         schema = json.loads(path.read_text(encoding="utf-8"))
         assert schema.get("$schema") == "https://json-schema.org/draft/2020-12/schema"
         assert schema.get("additionalProperties") is False
+
+    evaluations = json.loads((ROOT / "evals/skill-routing.json").read_text(encoding="utf-8"))
+    assert evaluations["schema_version"] == "1.0"
+    case_ids = [case["id"] for case in evaluations["cases"]]
+    assert len(case_ids) == len(set(case_ids)), "evaluation case IDs must be unique"
+    skill_names = {path.parent.name for path in skills}
+    for case in evaluations["cases"]:
+        assert set(case) == {"id", "prompt", "expected_skill"}
+        assert case["prompt"].strip()
+        assert case["expected_skill"] is None or case["expected_skill"] in skill_names
+
+    evidence_schema = json.loads(
+        (ROOT / "schemas/evidence.schema.json").read_text(encoding="utf-8")
+    )
+    required = set(evidence_schema["required"])
+    for path in (ROOT / "examples").glob("evidence-*.json"):
+        example = json.loads(path.read_text(encoding="utf-8"))
+        assert required <= set(example), f"{path} is missing required evidence fields"
+        assert example["target_url"].endswith(".test/"), f"{path} must remain synthetic"
     return 0
 
 
