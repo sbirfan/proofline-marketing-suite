@@ -4,6 +4,22 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-18
+
+### Added
+
+- Deterministic checks for description length, visible-content depth, form friction, generic actions, incomplete social metadata, malformed JSON-LD, internal-link absence, robots restrictions, sitemap absence, blocked sitemap audits, and truncated sitemap collection
+- Versioned specialist-agent input and result schemas
+- Injection-resistant technical-agent briefs containing references, limitations, and prohibited actions without raw page text
+- Evidence-availability and scoring-methodology sections in Markdown reports
+
+### Changed
+
+- Scoring version advanced to `3.0` with explicit finding-ID penalties and category-specific evidence coverage
+- Markdown findings are prioritized by severity and stable finding ID
+- Audit results now record score version and structured agent briefs
+- Technical Audit phase documentation and release gates were added
+
 ## [0.2.0] - 2026-09-18
 
 ### Added

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://svgai.example/schemas/agent-result.schema.json",
+  "title": "Specialist Agent Result",
+  "type": "object",
+  "required": ["schema_version", "agent", "interpretations", "recommendations"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "agent": { "type": "string" },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "finding_ids", "evidence_urls", "confidence", "limitations"],
+        "properties": {
+          "claim": { "type": "string", "minLength": 1 },
+          "finding_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "evidence_urls": { "type": "array", "items": { "type": "string", "format": "uri" }, "minItems": 1 },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "limitations": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action", "finding_ids", "priority"],
+        "properties": {
+          "action": { "type": "string", "minLength": 1 },
+          "finding_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "priority": { "enum": ["now", "next", "later"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

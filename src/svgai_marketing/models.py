@@ -116,6 +116,7 @@ class EvidenceDocument:
 @dataclass(slots=True)
 class AuditResult:
     schema_version: str
+    score_version: str
     target_url: str
     generated_at: str
     evidence: EvidenceDocument
@@ -125,6 +126,7 @@ class AuditResult:
     confidence: float
     coverage: float
     status: str
+    agent_briefs: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
