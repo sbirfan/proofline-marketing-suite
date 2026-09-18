@@ -3,10 +3,10 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** alpha (`0.4.1 — Security & Packaging`). Evidence collection, deterministic technical checks,
-> explicit score rules, constrained agent briefs, output redaction, hardened URL handling, reproducible package
-> builds, and prioritized JSON/Markdown reporting are functional. Multi-page scheduling, live specialist
-> execution, competitor research, and complete six-category scoring remain roadmap work.
+> **Status:** alpha (`0.5.0 — Full Marketing Audit`). Evidence collection, deterministic checks, explicit score
+> rules, six evidence-bounded specialist briefs, confirmed competitor collection, failure-isolated specialist
+> adapters, deterministic synthesis, and JSON/Markdown reporting are functional. The package does not bundle or
+> invoke an external model; callers supply adapters when specialist execution is required.
 
 ## Why this project exists
 
@@ -28,7 +28,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Evidence Engine | 0.2.0 | Complete | 2026-09-18 |
 | Technical Audit | 0.3.0 | Complete | 2026-09-18 |
 | Security and packaging | 0.4.0 | Complete | 2026-09-18 |
-| Full Marketing Audit | 0.5.0 | Planned | — |
+| Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 |
 | Client reporting | 0.6.0 | Planned | — |
 | Extended capabilities | 0.7.0–0.8.0 | Planned | — |
 | Public beta | 0.9.0 | Planned | — |
@@ -53,6 +53,8 @@ Run an audit:
 svgai-marketing audit https://example.com --format markdown
 svgai-marketing audit https://example.com --format json --output .audit/example.json
 svgai-marketing audit https://example.com --browser-fallback
+svgai-marketing audit https://example.com --audience "Operations leaders" --offer "Demo"
+svgai-marketing audit https://example.com --competitor https://competitor.example --comparison-dimension positioning --confirm-competitors
 ```
 
 Run checks:
@@ -106,18 +108,22 @@ evidence rather than browsing independently.
 - Prompt-boundary neutralization, recursive secret redaction, credential-safe URLs, and bounded prompt inputs
 - Reproducible source/wheel builds with metadata validation and clean-environment CLI installation in CI
 - Optional browser-extra smoke checks, CodeQL scanning, Dependabot updates, and checksummed tag artifacts
+- Six structured specialist briefs with explicit business context, limitations, and prohibited actions
+- Confirmed competitor collection under the same bounded policy, with comparable states and retrieval provenance
+- Concurrent caller-supplied specialist adapters with schema validation and isolated failure recording
+- Deterministic score synthesis from bounded dimension ratings; agents never calculate canonical scores
 
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
-[scoring](docs/scoring.md), [security](docs/security.md), and [development](docs/development.md).
+[scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
+[security](docs/security.md), and [development](docs/development.md).
 
 ## Important limitations
 
 The current release analyzes one target page while using robots.txt and sitemaps for discovery evidence; it
-does not yet schedule an audit of every discovered page. It detects likely app shells and can render them when
-`--browser-fallback` is requested and optional Playwright support is installed. Competitive and growth scores
-remain `not_tested` until relevant evidence exists. A partial overall score covers tested categories only and
-is labeled accordingly. The technical-agent brief is a safe hand-off contract; the Python CLI does not invoke
-an external language model.
+does not yet schedule every discovered page. It detects likely app shells and can render them when requested and
+optional Playwright support is installed. Competitive and growth scores remain `not_tested` unless validated
+specialist assessments are supplied. A partial overall covers tested categories only. The CLI creates briefs but
+does not invoke an external language model. Competitor collection requires explicit target confirmation.
 
 Audit output is decision support, not a guarantee of search rankings, accessibility compliance, privacy
 compliance, or revenue impact. Manually verify client-facing claims.

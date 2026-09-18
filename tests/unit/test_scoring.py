@@ -6,7 +6,7 @@ from svgai_marketing.models import (
     PageEvidence,
     Severity,
 )
-from svgai_marketing.scoring.engine import calculate_scores
+from svgai_marketing.scoring.engine import calculate_scores, synthesize_specialist_scores
 
 
 def evidence(status: ObservationStatus) -> EvidenceDocument:
@@ -62,3 +62,38 @@ def test_unregistered_finding_cannot_silently_change_score() -> None:
     categories, _, _, _, _ = calculate_scores(evidence(ObservationStatus.OBSERVED), [finding])
 
     assert categories["seo"].score == 100
+
+
+def test_specialist_assessments_complete_unscored_categories_deterministically() -> None:
+    categories, _, _, _, _ = calculate_scores(evidence(ObservationStatus.OBSERVED), [])
+    results = {
+        agent: {
+            "dimension_assessments": [
+                {
+                    "dimension": "example",
+                    "rating": "adequate",
+                    "confidence": 0.8,
+                    "evidence_urls": ["https://example.test/"],
+                    "limitations": [],
+                }
+            ]
+        }
+        for agent in (
+            "content-strategist",
+            "conversion-analyst",
+            "competitive-analyst",
+            "brand-strategist",
+            "growth-strategist",
+        )
+    }
+
+    updated, overall, confidence, coverage, status = synthesize_specialist_scores(
+        categories, results
+    )
+
+    assert updated["competitive"].score == 70
+    assert updated["growth"].score == 70
+    assert overall is not None
+    assert confidence > 0
+    assert coverage > 0
+    assert status == "complete"
