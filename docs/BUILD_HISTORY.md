@@ -14,7 +14,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Full Marketing Audit | 0.5.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/full-marketing-audit` |
 | Client reporting | 0.6.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/client-reporting` |
 | Analysis capabilities | 0.7.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/analysis-capabilities` |
-| Campaign capabilities | 0.8.0 | Planned | — | — | To be scoped |
+| Campaign capabilities | 0.8.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/campaign-capabilities` |
 | Public beta | 0.9.0 | Planned | — | — | To be scoped |
 | Stable release | 1.0.0 | Planned | — | — | EPIC 20 |
 
@@ -225,6 +225,32 @@ Still deferred to later phases:
 
 - Campaign asset generation for copy, email, social, ads, launches, and proposals
 - Hosted delivery, provider-specific publishing, and external account mutations
+
+## Phase 0.8.0 — Campaign Capabilities
+
+Completed on 2026-09-18.
+
+Built:
+
+- Review-ready `/copy`, `/emails`, `/social`, `/ads`, `/launch`, and `/proposal` Claude Code skills
+- Required audience, offer, objective, channel, budget, timing, ownership, commercial, and permission context
+  appropriate to each campaign mode
+- Shared structured campaign contract for artifacts, approved or placeholder claims, assumptions, approvals, and
+  measurement guardrails
+- Explicit prohibitions on invented proof, consent, scarcity, pricing, performance, legal approval, and authority
+- External-action boundaries that require separate approval before publishing, sending, launching, scheduling,
+  signing, purchasing, invoicing, or modifying connected accounts
+- Skill catalog, folder/frontmatter checks, security-boundary tests, and official skill validation
+
+Quality record at phase completion:
+
+- All standard local gates, package builds, installed extras, GitHub CI, and CodeQL are required
+- Every campaign skill is validated with the skill-creator quick validator
+
+Still deferred to later phases:
+
+- Provider-specific publishing adapters
+- Live account mutation, budget changes, list uploads, and CRM updates
 
 ## Maintenance rule
 

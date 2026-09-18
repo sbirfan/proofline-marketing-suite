@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://svgai.example/schemas/campaign-output.schema.json",
+  "title": "Campaign Skill Output",
+  "type": "object",
+  "required": ["schema_version", "skill", "status", "objective", "audience", "artifacts", "claims", "assumptions", "approvals_required", "measurement"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "skill": { "enum": ["copy", "emails", "social", "ads", "launch", "proposal"] },
+    "status": { "enum": ["draft", "blocked_missing_context"] },
+    "objective": { "type": ["string", "null"] },
+    "audience": { "type": ["string", "null"] },
+    "artifacts": { "type": "array", "items": { "type": "object", "required": ["name", "content", "channel"], "properties": { "name": { "type": "string", "minLength": 1 }, "content": { "type": "string" }, "channel": { "type": "string" } }, "additionalProperties": false } },
+    "claims": { "type": "array", "items": { "type": "object", "required": ["text", "status", "source_urls"], "properties": { "text": { "type": "string" }, "status": { "enum": ["approved", "needs_review", "placeholder"] }, "source_urls": { "type": "array", "items": { "type": "string", "format": "uri" } } }, "additionalProperties": false } },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "approvals_required": { "type": "array", "items": { "type": "string" } },
+    "measurement": { "type": "object", "required": ["primary_metric", "guardrails"], "properties": { "primary_metric": { "type": ["string", "null"] }, "guardrails": { "type": "array", "items": { "type": "string" } } }, "additionalProperties": false }
+  },
+  "additionalProperties": false
+}

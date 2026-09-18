@@ -4,6 +4,19 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-09-18
+
+### Added
+
+- `/copy`, `/emails`, `/social`, `/ads`, `/launch`, and `/proposal` campaign skills
+- Shared campaign output schema covering artifacts, claim review, assumptions, approvals, and measurement
+- Structural tests for campaign skill discovery, untrusted-evidence boundaries, and external-action approval gates
+
+### Changed
+
+- Skill catalog and README now document the complete analysis and campaign command surface
+- Package and plugin versions advanced to 0.8.0
+
 ## [0.7.0] - 2026-09-18
 
 ### Added
