@@ -3,10 +3,11 @@
   "$id": "https://svgai.example/schemas/agent-brief.schema.json",
   "title": "Specialist Agent Brief",
   "type": "object",
-  "required": ["schema_version", "agent", "policy", "target_url", "collection_status", "render_mode", "finding_ids", "evidence_urls", "limitations", "prohibited_actions"],
+  "required": ["schema_version", "agent", "category", "policy", "target_url", "collection_status", "render_mode", "finding_ids", "evidence_urls", "limitations", "prohibited_actions", "required_dimensions", "structured_evidence", "business_context", "comparison_evidence"],
   "properties": {
     "schema_version": { "const": "1.0" },
     "agent": { "type": "string" },
+    "category": { "enum": ["content", "conversion", "seo", "competitive", "brand", "growth"] },
     "policy": { "type": "string", "minLength": 1 },
     "target_url": { "type": "string", "format": "uri" },
     "collection_status": { "type": "string" },
@@ -14,8 +15,11 @@
     "finding_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
     "evidence_urls": { "type": "array", "items": { "type": "string", "format": "uri" }, "uniqueItems": true },
     "limitations": { "type": "array", "items": { "type": "string" } },
-    "prohibited_actions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+    "prohibited_actions": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "required_dimensions": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "structured_evidence": { "type": "object" },
+    "business_context": { "type": "object" },
+    "comparison_evidence": { "type": "array", "items": { "type": "object" } }
   },
   "additionalProperties": false
 }
-

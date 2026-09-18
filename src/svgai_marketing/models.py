@@ -100,6 +100,46 @@ class CategoryScore:
     status: str = "scored"
 
 
+@dataclass(slots=True, frozen=True)
+class SourcedMetric:
+    """A numeric business input whose provenance is explicit."""
+
+    value: float
+    source: str
+
+
+@dataclass(slots=True)
+class BusinessContext:
+    """User-confirmed context; blank fields must never be inferred from website copy."""
+
+    audience: str | None = None
+    offer: str | None = None
+    primary_conversion: str | None = None
+    competitor_urls: list[str] = field(default_factory=list)
+    comparison_dimensions: list[str] = field(default_factory=list)
+    competitors_confirmed: bool = False
+    monthly_traffic: SourcedMetric | None = None
+    conversion_rate: SourcedMetric | None = None
+    average_value: SourcedMetric | None = None
+    close_rate: SourcedMetric | None = None
+    currency: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+    @property
+    def revenue_inputs_complete(self) -> bool:
+        return all(
+            value is not None
+            for value in (
+                self.monthly_traffic,
+                self.conversion_rate,
+                self.average_value,
+                self.close_rate,
+            )
+        )
+
+
 @dataclass(slots=True)
 class EvidenceDocument:
     schema_version: str
@@ -127,6 +167,10 @@ class AuditResult:
     coverage: float
     status: str
     agent_briefs: dict[str, dict[str, Any]] = field(default_factory=dict)
+    agent_results: dict[str, dict[str, Any]] = field(default_factory=dict)
+    agent_failures: dict[str, str] = field(default_factory=dict)
+    business_context: dict[str, Any] = field(default_factory=dict)
+    competitive_evidence: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
