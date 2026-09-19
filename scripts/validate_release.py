@@ -55,6 +55,21 @@ def main() -> int:
         assert case["prompt"].strip()
         assert case["expected_skill"] is None or case["expected_skill"] in skill_names
 
+    context_evals = json.loads((ROOT / "evals/context-integrity.json").read_text(encoding="utf-8"))
+    assert context_evals["schema_version"] == "1.0"
+    context_ids = [case["id"] for case in context_evals["cases"]]
+    assert len(context_ids) == len(set(context_ids)), "context evaluation IDs must be unique"
+    for case in context_evals["cases"]:
+        assert set(case) == {
+            "id",
+            "site_signals",
+            "supplied_offer",
+            "supplied_conversion",
+            "expected_action",
+            "must_not_claim",
+        }
+        assert case["site_signals"] and case["must_not_claim"].strip()
+
     evidence_schema = json.loads(
         (ROOT / "schemas/evidence.schema.json").read_text(encoding="utf-8")
     )

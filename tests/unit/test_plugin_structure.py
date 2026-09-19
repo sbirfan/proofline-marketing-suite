@@ -40,3 +40,11 @@ def test_agents_have_valid_frontmatter_boundaries() -> None:
         assert content.startswith("---\n")
         assert content.count("---") >= 2
         assert "description:" in content.split("---", 2)[1]
+
+
+def test_audit_skill_requires_context_conflict_resolution() -> None:
+    content = (ROOT / "skills/audit/SKILL.md").read_text(encoding="utf-8").casefold()
+    assert "do not copy" in content
+    assert "materially conflict" in content
+    assert "ask whether to audit the current site" in content
+    assert "and stop" in content

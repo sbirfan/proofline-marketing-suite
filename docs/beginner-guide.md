@@ -137,21 +137,42 @@ The audit distinguishes among:
 
 Do not describe a blocked, failed, render-required, or not-tested result as proof that something is missing.
 
-### A stronger first prompt
+### Add the website's real business context
 
-Give Claude business context so it does not have to leave important categories untested:
+Do not copy business details from an example. Replace every bracketed placeholder with facts about the website
+you are auditing. If you do not know a value, write `unknown` instead of guessing.
 
 ```text
-/proofline:audit https://example.com
+/proofline:audit [FULL WEBSITE URL]
 
-Audience: owners of small service businesses
-Offer: a free 30-minute consultation
-Primary conversion: book a consultation
+Audience: [WHO ACTUALLY BUYS OR USES THIS OFFER]
+Offer: [WHAT THE WEBSITE ACTUALLY SELLS OR PROVIDES]
+Primary conversion: [PURCHASE, SUBSCRIBE, BOOK, REQUEST A QUOTE, OR ANOTHER REAL ACTION]
 Please save the audit evidence and create a client-ready PDF report.
 ```
 
-The suite will not invent the audience, offer, or conversion goal from webpage copy. If you do not know an
-answer, say “unknown” instead of guessing.
+Examples by business model:
+
+```text
+# Ecommerce
+Audience: professional hairstylists and barbers
+Offer: professional hair-cutting and thinning shears
+Primary conversion: complete an ecommerce purchase through Add to Cart and checkout
+
+# SaaS
+Audience: operations teams at growing companies
+Offer: workflow automation software
+Primary conversion: start a free trial
+
+# Local service business
+Audience: homeowners in the local service area
+Offer: residential plumbing repair
+Primary conversion: request a service appointment
+```
+
+Use only the example matching the site's actual model and replace its details. Proofline must compare supplied
+context with observed conversion evidence. If they conflict, it should stop and ask whether you want a
+current-site audit, a planned-funnel assessment, or a corrected brief or URL.
 
 ## Part 5 — Create reports directly from the terminal
 
