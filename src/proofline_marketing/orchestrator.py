@@ -12,6 +12,7 @@ from .agents.specialists import (
 from .analyzers.technical import analyze_evidence
 from .context import assess_context
 from .crawler.collector import EvidenceCollector
+from .evidence_scope import build_evidence_scope
 from .models import AuditMode, AuditResult, BusinessContext, EvidenceDocument, utc_now
 from .scoring.engine import calculate_scores, synthesize_specialist_scores
 
@@ -69,6 +70,7 @@ def run_audit(
         agent_failures=failures,
         business_context=context.to_dict(),
         context_assessment=context_assessment.to_dict(),
+        evidence_scope=build_evidence_scope(evidence),
         competitive_evidence={
             target: item.to_dict() for target, item in competitor_evidence.items()
         },

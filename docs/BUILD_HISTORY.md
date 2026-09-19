@@ -21,6 +21,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-v2` |
 | Context guide hotfix | 2.0.1 | Complete | 2026-09-19 | 2026-09-19 | `fix/context-guide-2.0.1` |
 | Context Integrity | 2.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/context-integrity-2.1.0` |
+| Evidence Integrity | 2.2.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/evidence-integrity-2.2.0` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -392,6 +393,24 @@ Quality record at phase completion:
 - Ruff formatting/lint, strict mypy, pytest/coverage, schema validation, release validation, package build, and
   clean-wheel smoke checks are required locally
 - Phase/release pull requests and both post-merge commits require successful GitHub CI and CodeQL
+
+## Phase 2.2.0 — Evidence Integrity
+
+Completed on 2026-09-19.
+
+Built:
+
+- A canonical evidence-scope record that separates represented pages from sitemap-discovered URLs
+- Explicit unavailable URL status/reason records when the target cannot be represented
+- Page and resource claim scopes on deterministic findings
+- A machine-enforced `represented_pages_only` boundary for absence claims
+- Markdown scope summaries that disclose unrepresented discovery and reject site-wide inference
+- JSON Schema and regression-test coverage for every scope field and claim boundary
+
+Quality record at phase completion:
+
+- All local quality, schema, package, and clean-wheel gates are required
+- Phase/release PRs and post-merge commits require successful GitHub CI and CodeQL
 
 ## Maintenance rule
 
