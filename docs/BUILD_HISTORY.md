@@ -22,6 +22,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Context guide hotfix | 2.0.1 | Complete | 2026-09-19 | 2026-09-19 | `fix/context-guide-2.0.1` |
 | Context Integrity | 2.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/context-integrity-2.1.0` |
 | Evidence Integrity | 2.2.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/evidence-integrity-2.2.0` |
+| Reporting Integrity | 2.3.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/reporting-integrity-2.3.0` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -410,6 +411,25 @@ Built:
 Quality record at phase completion:
 
 - All local quality, schema, package, and clean-wheel gates are required
+- Phase/release PRs and post-merge commits require successful GitHub CI and CodeQL
+
+## Phase 2.3.0 — Reporting Integrity
+
+Completed on 2026-09-19.
+
+Built:
+
+- A shared final-report validation gate used by both HTML and PDF renderers
+- Hard blocking of unresolved context conflicts, including direct renderer API calls
+- Rejection of unsourced findings and site-wide claims unsupported by canonical evidence scope
+- Context status, audit mode, observed business model, represented-page count, and unrepresented discovery in
+  both client-ready formats
+- Visible page/resource scope labels for each finding
+- Deterministic regression coverage for safe rendering and every blocking condition
+
+Quality record at phase completion:
+
+- All local quality, schema, report, package, and clean-wheel gates are required
 - Phase/release PRs and post-merge commits require successful GitHub CI and CodeQL
 
 ## Maintenance rule
