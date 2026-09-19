@@ -290,6 +290,7 @@ def analyze_evidence(evidence: EvidenceDocument) -> list[Finding]:
                     "Confirm the rule is intentional and test search-engine-specific "
                     "access separately."
                 ),
+                claim_scope="resource",
             )
         )
     sitemap_status = evidence.sitemap.get("status")
@@ -313,6 +314,7 @@ def analyze_evidence(evidence: EvidenceDocument) -> list[Finding]:
                 recommendation=(
                     "Publish or declare a sitemap when the site benefits from URL discovery."
                 ),
+                claim_scope="resource",
             )
         )
     elif sitemap_status == "blocked":
@@ -334,6 +336,7 @@ def analyze_evidence(evidence: EvidenceDocument) -> list[Finding]:
                     "Verify search-engine access with provider logs or a search-engine "
                     "inspection tool."
                 ),
+                claim_scope="resource",
             )
         )
     if evidence.sitemap.get("truncated") is True:
@@ -354,6 +357,7 @@ def analyze_evidence(evidence: EvidenceDocument) -> list[Finding]:
                 recommendation=(
                     "Increase limits deliberately or sample sitemap segments separately."
                 ),
+                claim_scope="resource",
             )
         )
     return findings

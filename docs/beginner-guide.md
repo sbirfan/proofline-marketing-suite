@@ -136,6 +136,9 @@ The audit distinguishes among:
 - **Not tested:** the audit did not have enough context or evidence to test the item.
 
 Do not describe a blocked, failed, render-required, or not-tested result as proof that something is missing.
+The report's **Evidence scope** section lists pages actually represented by collected evidence. Sitemap URLs may
+be discovered without being analyzed. Treat “not detected” as page-scoped unless the report explicitly states
+that broader coverage was collected.
 
 ### Add the website's real business context
 

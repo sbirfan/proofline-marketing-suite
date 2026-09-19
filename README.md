@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** stable (`2.1.0 — Context Integrity`). The suite includes evidence-backed audit, analysis,
+> **Status:** stable (`2.2.0 — Evidence Integrity`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -38,6 +38,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 |
 | Context guide hotfix | 2.0.1 | Complete | 2026-09-19 |
 | Context Integrity | 2.1.0 | Complete | 2026-09-19 |
+| Evidence Integrity | 2.2.0 | Complete | 2026-09-19 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -144,6 +145,8 @@ evidence rather than browsing independently.
 - Versioned agent brief/result contracts that exclude raw webpage text from specialist hand-offs
 - Versioned JSON schemas and explicit finding-ID rules for 0–100 category scores
 - Confidence and evidence coverage distinct from score
+- Machine-readable represented, discovered, unrepresented, and unavailable URL scope
+- Page/resource claim scopes that prevent single-page evidence from becoming site-wide absence claims
 - Prioritized JSON and Markdown output with evidence-availability and methodology sections
 - Prompt-injection boundaries in the audit skill and every specialist agent
 - Prompt-boundary neutralization, recursive secret redaction, credential-safe URLs, and bounded prompt inputs

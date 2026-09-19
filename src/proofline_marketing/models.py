@@ -58,6 +58,19 @@ def default_context_assessment() -> dict[str, Any]:
     }
 
 
+def default_evidence_scope() -> dict[str, Any]:
+    """Return conservative boundaries for directly constructed audit results."""
+    return {
+        "collection_scope": "single_page",
+        "represented_urls": [],
+        "discovered_urls": [],
+        "unrepresented_discovered_count": 0,
+        "unavailable_urls": [],
+        "absence_claim_scope": "represented_pages_only",
+        "sitewide_claims_supported": False,
+    }
+
+
 @dataclass(slots=True)
 class FetchObservation:
     url: str
@@ -118,6 +131,7 @@ class Finding:
     confidence: float
     recommendation: str | None = None
     kind: str = "observed_fact"
+    claim_scope: str = "page"
 
 
 @dataclass(slots=True)
@@ -215,6 +229,7 @@ class AuditResult:
     agent_failures: dict[str, str] = field(default_factory=dict)
     business_context: dict[str, Any] = field(default_factory=dict)
     context_assessment: dict[str, Any] = field(default_factory=default_context_assessment)
+    evidence_scope: dict[str, Any] = field(default_factory=default_evidence_scope)
     competitive_evidence: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
