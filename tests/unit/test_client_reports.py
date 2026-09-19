@@ -12,7 +12,12 @@ from proofline_marketing.models import (
     ObservationStatus,
     Severity,
 )
-from proofline_marketing.reporting import ReportBrand, render_html, render_pdf
+from proofline_marketing.reporting import (
+    ReportBrand,
+    ReportIntegrityError,
+    render_html,
+    render_pdf,
+)
 
 pypdf = pytest.importorskip("pypdf")
 
@@ -63,6 +68,9 @@ def test_html_is_accessible_printable_and_escapes_untrusted_values() -> None:
     assert "@media print" in body
     assert "Client &amp; Co" in body
     assert "The &lt;title&gt; element is missing &amp; should be reviewed." in body
+    assert "Context integrity" in body
+    assert "Evidence scope" in body
+    assert "scope: page" in body
 
 
 def test_brand_colors_reject_css_injection() -> None:
@@ -80,4 +88,33 @@ def test_pdf_is_deterministic_and_extractable(tmp_path: Path) -> None:
     assert len(reader.pages) >= 1
     assert "Marketing Audit" in text
     assert "Category scores" in text
+    assert "Context integrity" in text
+    assert "Evidence scope" in text
     assert "Page 1" in text
+
+
+def test_client_reports_block_unresolved_context_conflict(tmp_path: Path) -> None:
+    result = audit()
+    result.context_assessment["status"] = "conflict"
+    result.context_assessment["resolution_required"] = True
+
+    with pytest.raises(ReportIntegrityError, match="context conflict"):
+        render_html(result)
+    with pytest.raises(ReportIntegrityError, match="context conflict"):
+        render_pdf(result, tmp_path / "blocked.pdf")
+
+
+def test_client_reports_reject_unsupported_sitewide_claim() -> None:
+    result = audit()
+    result.findings[0].claim_scope = "site"
+
+    with pytest.raises(ReportIntegrityError, match="site-wide"):
+        render_html(result)
+
+
+def test_client_reports_require_evidence_references() -> None:
+    result = audit()
+    result.findings[0].evidence = []
+
+    with pytest.raises(ReportIntegrityError, match="no evidence"):
+        render_html(result)

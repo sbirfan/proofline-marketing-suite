@@ -8,6 +8,7 @@ from typing import Any
 
 from ..models import AuditResult
 from .html import ReportBrand
+from .integrity import validate_report_integrity
 
 
 def render_pdf(
@@ -16,6 +17,7 @@ def render_pdf(
     brand: ReportBrand | None = None,
 ) -> Path:
     """Write a deterministic PDF; ReportLab remains an optional report dependency."""
+    validate_report_integrity(result)
     try:
         from reportlab.lib import colors
         from reportlab.lib.enums import TA_RIGHT
@@ -139,7 +141,33 @@ def render_pdf(
             ]
         )
     )
-    story.extend([summary, Paragraph("Category scores", styles["Section"])])
+    context = result.context_assessment
+    scope = result.evidence_scope
+    story.extend(
+        [
+            summary,
+            Paragraph("Context integrity", styles["Section"]),
+            Paragraph(
+                escape(
+                    f"Status: {context.get('status', 'unknown')}. Audit mode: "
+                    f"{context.get('audit_mode', 'current_state')}. Observed business model: "
+                    f"{context.get('observed_business_model', 'unknown')}."
+                ),
+                styles["BodyText"],
+            ),
+            Paragraph("Evidence scope", styles["Section"]),
+            Paragraph(
+                escape(
+                    f"{len(scope.get('represented_urls', []))} represented page(s); "
+                    f"{scope.get('unrepresented_discovered_count', 0)} discovered but "
+                    "unrepresented page(s). Absence claims apply to represented pages only; "
+                    "site-wide absence claims are not supported."
+                ),
+                styles["BodyText"],
+            ),
+            Paragraph("Category scores", styles["Section"]),
+        ]
+    )
     score_rows: list[list[Any]] = [["Category", "Score", "Confidence", "Coverage"]]
     for name, value in result.categories.items():
         score_rows.append(
@@ -181,7 +209,10 @@ def render_pdf(
             KeepTogether(
                 [
                     Paragraph(escape(finding.claim), styles["Finding"]),
-                    Paragraph(escape(f"{finding.severity} - {finding.id}"), styles["BodyText"]),
+                    Paragraph(
+                        escape(f"{finding.severity} - {finding.id} - scope: {finding.claim_scope}"),
+                        styles["BodyText"],
+                    ),
                     Paragraph(
                         escape(finding.recommendation or "No recommendation recorded."),
                         styles["BodyText"],

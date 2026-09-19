@@ -220,6 +220,10 @@ proofline audit https://example.com --browser-fallback --format pdf --output rep
 The new files appear in the `proofline-marketing-suite` folder. In Visual Studio Code, use the file list on the
 left to open them. PDF output requires the `reports` extra installed in Part 2.
 
+HTML and PDF reports include **Context integrity** and **Evidence scope** sections. Proofline will not create a
+client-ready report while context is unresolved, a finding has no evidence reference, or a site-wide claim is
+unsupported by the represented pages.
+
 ## Part 6 — Use a focused analysis skill
 
 You do not need to run every skill. Choose the one that matches the job:
