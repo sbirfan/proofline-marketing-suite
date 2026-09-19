@@ -1,5 +1,5 @@
-from svgai_marketing.analyzers.technical import analyze_evidence, analyze_page
-from svgai_marketing.models import (
+from proofline_marketing.analyzers.technical import analyze_evidence, analyze_page
+from proofline_marketing.models import (
     EvidenceDocument,
     FetchObservation,
     ObservationStatus,

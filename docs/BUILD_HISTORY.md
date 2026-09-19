@@ -18,6 +18,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Public beta | 0.9.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/public-beta` |
 | Stable release | 1.0.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/stable-release` |
 | Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-rename` |
+| Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-v2` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -327,6 +328,29 @@ Deferred to 2.0:
 - `proofline_marketing` Python namespace
 - `/proofline:*` Claude plugin namespace
 - Removal of deprecated SVG AI technical aliases
+
+## Phase 2.0.0 — Proofline Namespace Migration
+
+Completed on 2026-09-19.
+
+Built:
+
+- `/proofline:*` Claude plugin namespace across all 14 health, audit, analysis, reporting, and campaign skills
+- `proofline_marketing` Python namespace across runtime modules, examples, tests, typing, coverage, and skill calls
+- `proofline` as the sole installed CLI and `proofline` as the plugin manifest name
+- `proofline.example` schema identifiers with updated cross-schema references
+- Proofline-named release artifacts, clean-wheel checks, and complete 1.x-to-2.0 migration guidance
+- README, beginner guide, changelog, and dated build history synchronized with the final namespace
+
+Quality record at phase completion:
+
+- All formatting, lint, strict typing, tests, coverage, schema, build, and clean-wheel gates are required
+- Phase and release PRs both require successful cross-platform CI and CodeQL before merge
+
+Breaking changes:
+
+- Removed the `svgai-marketing` command, `svgai_marketing` imports, `/svgai-marketing:*` commands, and legacy
+  schema base identifiers after the 1.1 compatibility release
 
 ## Maintenance rule
 

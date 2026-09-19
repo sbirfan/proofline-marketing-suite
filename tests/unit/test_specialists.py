@@ -1,5 +1,5 @@
-from svgai_marketing.agents.specialists import build_specialist_briefs, execute_specialists
-from svgai_marketing.models import (
+from proofline_marketing.agents.specialists import build_specialist_briefs, execute_specialists
+from proofline_marketing.models import (
     BusinessContext,
     EvidenceDocument,
     FetchObservation,

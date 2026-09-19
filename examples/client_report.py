@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from svgai_marketing.models import (
+from proofline_marketing.models import (
     AuditResult,
     CategoryScore,
     EvidenceDocument,
@@ -14,7 +14,7 @@ from svgai_marketing.models import (
     ObservationStatus,
     Severity,
 )
-from svgai_marketing.reporting import ReportBrand, render_pdf
+from proofline_marketing.reporting import ReportBrand, render_pdf
 
 
 def sample_result() -> AuditResult:

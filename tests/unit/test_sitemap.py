@@ -1,8 +1,8 @@
 import gzip
 
-from svgai_marketing.crawler.http import FetchResult, SafeHttpClient
-from svgai_marketing.crawler.sitemap import inspect_sitemap
-from svgai_marketing.models import FetchObservation, ObservationStatus
+from proofline_marketing.crawler.http import FetchResult, SafeHttpClient
+from proofline_marketing.crawler.sitemap import inspect_sitemap
+from proofline_marketing.models import FetchObservation, ObservationStatus
 
 
 class FakeClient(SafeHttpClient):

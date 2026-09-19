@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/evidence.schema.json",
+  "$id": "https://proofline.example/schemas/evidence.schema.json",
   "title": "Evidence Document",
   "type": "object",
   "required": ["schema_version", "target_url", "fetch", "page", "robots", "sitemap"],

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/campaign-output.schema.json",
+  "$id": "https://proofline.example/schemas/campaign-output.schema.json",
   "title": "Campaign Skill Output",
   "type": "object",
   "required": ["schema_version", "skill", "status", "objective", "audience", "artifacts", "claims", "assumptions", "approvals_required", "measurement"],

@@ -1,6 +1,6 @@
 import json
 
-from svgai_marketing import __version__, cli
+from proofline_marketing import __version__, cli
 
 
 def test_doctor_json_command(capsys) -> None:

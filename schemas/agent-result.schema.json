@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/agent-result.schema.json",
+  "$id": "https://proofline.example/schemas/agent-result.schema.json",
   "title": "Specialist Agent Result",
   "type": "object",
   "required": ["schema_version", "agent", "interpretations", "recommendations", "dimension_assessments"],

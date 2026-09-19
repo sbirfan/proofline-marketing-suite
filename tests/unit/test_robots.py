@@ -1,4 +1,4 @@
-from svgai_marketing.crawler.robots import parse_robots
+from proofline_marketing.crawler.robots import parse_robots
 
 
 def test_parses_groups_sitemaps_and_crawl_delay() -> None:

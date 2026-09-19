@@ -15,15 +15,16 @@ def main() -> int:
     project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     expected = project["project"]["version"]
     manifest = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
-    package = (ROOT / "src/svgai_marketing/__init__.py").read_text(encoding="utf-8")
+    package = (ROOT / "src/proofline_marketing/__init__.py").read_text(encoding="utf-8")
     match = re.search(r'^__version__ = "([^"]+)"$', package, re.MULTILINE)
     assert match, "package version is missing"
     assert manifest["version"] == expected == match.group(1), "release versions differ"
     assert project["project"]["name"] == "proofline-marketing-suite"
     scripts = project["project"]["scripts"]
-    assert scripts["proofline"] == scripts["svgai-marketing"]
+    assert scripts == {"proofline": "proofline_marketing.cli:main"}
+    assert manifest["name"] == "proofline"
     assert manifest["repository"].endswith("/sbirfan/proofline-marketing-suite")
-    if expected.startswith("1."):
+    if expected.startswith(("1.", "2.")):
         classifiers = project["project"]["classifiers"]
         assert "Development Status :: 5 - Production/Stable" in classifiers
         for relative in ("docs/support.md", "docs/migration.md", "docs/release-notes-1.0.md"):

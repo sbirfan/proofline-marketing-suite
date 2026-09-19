@@ -1,5 +1,5 @@
-from svgai_marketing.agents.technical import build_technical_brief
-from svgai_marketing.models import (
+from proofline_marketing.agents.technical import build_technical_brief
+from proofline_marketing.models import (
     EvidenceDocument,
     EvidenceReference,
     FetchObservation,
