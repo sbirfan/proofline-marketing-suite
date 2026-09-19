@@ -26,7 +26,7 @@ jobs:
       - run: ruff format --check .
       - run: ruff check .
       - run: mypy src
-      - run: pytest --cov=svgai_marketing --cov-report=term-missing
+      - run: pytest --cov=proofline_marketing --cov-report=term-missing
 
   package:
     runs-on: ubuntu-latest
@@ -41,8 +41,6 @@ jobs:
       - run: python -m build
       - run: python -m venv .package-smoke
       - run: .package-smoke/bin/python -m pip install dist/*.whl
-      - run: .package-smoke/bin/svgai-marketing --help
-      - run: .package-smoke/bin/svgai-marketing doctor --json
       - run: .package-smoke/bin/proofline --help
       - run: .package-smoke/bin/proofline doctor --json
       - run: .package-smoke/bin/python -m pip install ".[browser]"

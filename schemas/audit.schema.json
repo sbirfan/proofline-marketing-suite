@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/audit.schema.json",
+  "$id": "https://proofline.example/schemas/audit.schema.json",
   "title": "Audit Result",
   "type": "object",
   "required": [

@@ -6,7 +6,7 @@ ROOT = Path(__file__).parents[2]
 
 def test_manifest_and_skill_frontmatter_exist() -> None:
     manifest = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
-    assert manifest["name"] == "svgai-marketing"
+    assert manifest["name"] == "proofline"
     for skill in (ROOT / "skills").glob("*/SKILL.md"):
         assert skill.read_text(encoding="utf-8").startswith("---\n")
 

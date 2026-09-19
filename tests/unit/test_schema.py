@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from svgai_marketing.models import (
+from proofline_marketing.models import (
     AuditResult,
     CategoryScore,
     EvidenceDocument,

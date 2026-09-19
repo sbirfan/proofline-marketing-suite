@@ -4,6 +4,19 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-09-19
+
+### Changed
+
+- Claude plugin namespace moved from `/svgai-marketing:*` to `/proofline:*`
+- Python package namespace moved from `svgai_marketing` to `proofline_marketing`
+- Schema base identifiers moved from `svgai.example` to `proofline.example`
+- Package and plugin versions advanced to 2.0.0
+
+### Removed
+
+- Legacy `svgai-marketing` CLI alias and SVG AI Python/plugin namespaces
+
 ## [1.1.0] - 2026-09-19
 
 ### Added

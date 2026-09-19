@@ -1,8 +1,8 @@
 from email.message import Message
 from urllib.error import HTTPError
 
-from svgai_marketing.crawler.http import SafeHttpClient, validate_public_url
-from svgai_marketing.models import ObservationStatus
+from proofline_marketing.crawler.http import SafeHttpClient, validate_public_url
+from proofline_marketing.models import ObservationStatus
 
 
 class RaisingOpener:

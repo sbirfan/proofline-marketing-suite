@@ -1,6 +1,6 @@
 import json
 
-from svgai_marketing import __version__, diagnostics
+from proofline_marketing import __version__, diagnostics
 
 
 def test_diagnostics_are_secret_free_and_machine_readable() -> None:

@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** stable (`1.1.0 — Proofline rename`). The suite includes evidence-backed audit, analysis,
+> **Status:** stable (`2.0.0 — Proofline namespaces`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -35,6 +35,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Public beta | 0.9.0 | Complete | 2026-09-18 |
 | Stable release | 1.0.0 | Complete | 2026-09-18 |
 | Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 |
+| Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -73,7 +74,7 @@ Run checks:
 ```bash
 ruff check .
 mypy src
-pytest --cov=svgai_marketing
+pytest --cov=proofline_marketing
 python scripts/validate_release.py
 python -m build
 ```
@@ -92,26 +93,25 @@ claude --plugin-dir .
 Then use:
 
 ```text
-/svgai-marketing:health
-/svgai-marketing:audit example.com
-/svgai-marketing:seo example.com
-/svgai-marketing:landing example.com
-/svgai-marketing:competitors example.com
-/svgai-marketing:brand example.com
-/svgai-marketing:funnel example.com
-/svgai-marketing:report .audit/example.json
-/svgai-marketing:copy
-/svgai-marketing:emails
-/svgai-marketing:social
-/svgai-marketing:ads
-/svgai-marketing:launch
-/svgai-marketing:proposal
+/proofline:health
+/proofline:audit example.com
+/proofline:seo example.com
+/proofline:landing example.com
+/proofline:competitors example.com
+/proofline:brand example.com
+/proofline:funnel example.com
+/proofline:report .audit/example.json
+/proofline:copy
+/proofline:emails
+/proofline:social
+/proofline:ads
+/proofline:launch
+/proofline:proposal
 ```
 
-The Claude plugin namespace remains `/svgai-marketing:*` throughout the compatible 1.x series. The product,
-repository, reports, and primary CLI are now Proofline. The former `svgai-marketing` CLI and the
-`svgai_marketing` Python namespace remain supported compatibility aliases; see the
-[Proofline migration guide](docs/renaming-to-proofline.md).
+Version 2.0 completes the Proofline namespace migration. Claude commands use `/proofline:*`, Python imports use
+`proofline_marketing`, and the command line uses `proofline`. See the
+[Proofline migration guide](docs/renaming-to-proofline.md) when upgrading from 1.x.
 
 Plugin instructions treat all retrieved material as untrusted evidence. Specialist agents receive structured
 evidence rather than browsing independently.

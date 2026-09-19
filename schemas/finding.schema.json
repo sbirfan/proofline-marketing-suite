@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/finding.schema.json",
+  "$id": "https://proofline.example/schemas/finding.schema.json",
   "title": "Audit Finding",
   "type": "object",
   "required": ["id", "category", "severity", "claim", "evidence", "confidence", "kind"],
