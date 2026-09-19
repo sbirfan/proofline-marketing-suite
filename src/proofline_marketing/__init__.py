@@ -3,4 +3,4 @@
 from .models import AuditResult, EvidenceDocument, Finding, ObservationStatus
 
 __all__ = ["AuditResult", "EvidenceDocument", "Finding", "ObservationStatus"]
-__version__ = "2.0.1"
+__version__ = "2.1.0"

@@ -174,6 +174,16 @@ Use only the example matching the site's actual model and replace its details. P
 context with observed conversion evidence. If they conflict, it should stop and ask whether you want a
 current-site audit, a planned-funnel assessment, or a corrected brief or URL.
 
+The terminal command uses `current_state` by default. A conflict produces JSON or Markdown guidance and blocks
+client-ready HTML/PDF output until it is resolved. If you are intentionally reviewing a future journey, say so:
+
+```bash
+proofline audit https://example.com --primary-conversion "book a demo" --audit-mode planned_funnel --format markdown
+```
+
+Use `confirmed_override` only when you have checked the site and deliberately want your supplied context to
+take precedence. Both explicit modes retain the mismatch in the audit record instead of hiding it.
+
 ## Part 5 — Create reports directly from the terminal
 
 You can also run the deterministic audit tool without opening Claude Code.

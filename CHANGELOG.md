@@ -4,6 +4,21 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-09-19
+
+### Added
+
+- Deterministic classification of observed business model and conversion actions
+- Structured context assessment with aligned, unknown, conflict, and overridden states
+- Current-state, planned-funnel, and confirmed-override audit modes in the Python API and CLI
+- Ecommerce conflict, aligned checkout, unknown-context, and planned-funnel regression coverage
+
+### Changed
+
+- Current-state context conflicts stop specialist execution and final report scoring
+- HTML and PDF generation is blocked until a current-state conflict is corrected or explicitly overridden
+- Markdown and JSON expose observed conversions, supplied conversion, conflict details, and resolution state
+
 ## [2.0.1] - 2026-09-19
 
 ### Fixed

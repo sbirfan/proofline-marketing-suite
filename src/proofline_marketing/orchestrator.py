@@ -10,8 +10,9 @@ from .agents.specialists import (
     execute_specialists,
 )
 from .analyzers.technical import analyze_evidence
+from .context import assess_context
 from .crawler.collector import EvidenceCollector
-from .models import AuditResult, BusinessContext, EvidenceDocument, utc_now
+from .models import AuditMode, AuditResult, BusinessContext, EvidenceDocument, utc_now
 from .scoring.engine import calculate_scores, synthesize_specialist_scores
 
 
@@ -24,21 +25,30 @@ def run_audit(
     specialist_executors: Mapping[str, SpecialistExecutor] | None = None,
     precollected_evidence: EvidenceDocument | None = None,
     precollected_competitors: Mapping[str, EvidenceDocument] | None = None,
+    audit_mode: AuditMode = AuditMode.CURRENT_STATE,
 ) -> AuditResult:
     """Collect once, fan out immutable briefs, then synthesize validated results."""
     context = business_context or BusinessContext()
     collector = EvidenceCollector(timeout=timeout, browser_fallback=browser_fallback)
     evidence = precollected_evidence or collector.collect(url)
+    context_assessment = assess_context(evidence, context, audit_mode)
     competitor_evidence = dict(precollected_competitors or {})
-    if context.competitors_confirmed:
+    if context.competitors_confirmed and not context_assessment.resolution_required:
         for competitor_url in context.competitor_urls:
             if competitor_url not in competitor_evidence:
                 competitor_evidence[competitor_url] = collector.collect(competitor_url)
     findings = analyze_evidence(evidence)
     categories, overall, confidence, coverage, status = calculate_scores(evidence, findings)
-    briefs = build_specialist_briefs(evidence, findings, context, competitor_evidence)
-    results, failures = execute_specialists(briefs, specialist_executors)
-    if results:
+    briefs: dict[str, dict[str, object]] = {}
+    results: dict[str, dict[str, object]] = {}
+    failures: dict[str, str] = {}
+    if not context_assessment.resolution_required:
+        briefs = build_specialist_briefs(evidence, findings, context, competitor_evidence)
+        results, failures = execute_specialists(briefs, specialist_executors)
+    else:
+        status = "context_conflict"
+        overall = None
+    if results and not context_assessment.resolution_required:
         categories, overall, confidence, coverage, status = synthesize_specialist_scores(
             categories, results
         )
@@ -58,6 +68,7 @@ def run_audit(
         agent_results=results,
         agent_failures=failures,
         business_context=context.to_dict(),
+        context_assessment=context_assessment.to_dict(),
         competitive_evidence={
             target: item.to_dict() for target, item in competitor_evidence.items()
         },

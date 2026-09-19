@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from .diagnostics import collect_diagnostics, render_diagnostics
-from .models import BusinessContext
+from .models import AuditMode, BusinessContext
 from .orchestrator import run_audit
 from .reporting import render_html, render_markdown, render_pdf
 
@@ -30,6 +30,15 @@ def build_parser() -> argparse.ArgumentParser:
     audit.add_argument("--audience", help="User-confirmed audience; never inferred from page copy")
     audit.add_argument("--offer", help="User-confirmed offer")
     audit.add_argument("--primary-conversion", help="User-confirmed primary conversion action")
+    audit.add_argument(
+        "--audit-mode",
+        choices=tuple(AuditMode),
+        default=AuditMode.CURRENT_STATE,
+        type=AuditMode,
+        help=(
+            "Interpret context as current_state (default), planned_funnel, or confirmed_override"
+        ),
+    )
     audit.add_argument("--competitor", action="append", default=[], help="Confirmed competitor URL")
     audit.add_argument(
         "--comparison-dimension", action="append", default=[], help="Confirmed comparison dimension"
@@ -63,7 +72,13 @@ def main(argv: list[str] | None = None) -> int:
         timeout=args.timeout,
         browser_fallback=args.browser_fallback,
         business_context=context,
+        audit_mode=args.audit_mode,
     )
+    if result.status == "context_conflict" and args.format in {"html", "pdf"}:
+        raise SystemExit(
+            "Context conflicts with observed website evidence. Review JSON or Markdown output, "
+            "correct the context, or explicitly use --audit-mode planned_funnel/confirmed_override."
+        )
     if args.format == "pdf":
         if not args.output:
             raise SystemExit("--output is required for PDF reports")

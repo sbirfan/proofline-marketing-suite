@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** stable (`2.0.1 — Context guide hotfix`). The suite includes evidence-backed audit, analysis,
+> **Status:** stable (`2.1.0 — Context Integrity`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -37,6 +37,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 |
 | Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 |
 | Context guide hotfix | 2.0.1 | Complete | 2026-09-19 |
+| Context Integrity | 2.1.0 | Complete | 2026-09-19 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -71,6 +72,8 @@ proofline audit https://example.com --browser-fallback
 proofline audit https://example.com --format html --output report.html
 proofline audit https://example.com --format pdf --output report.pdf
 proofline audit https://example.com --audience "Operations leaders" --offer "Demo"
+proofline audit https://example.com --primary-conversion "checkout"
+proofline audit https://example.com --primary-conversion "book a demo" --audit-mode planned_funnel
 proofline audit https://example.com --competitor https://competitor.example --comparison-dimension positioning --confirm-competitors
 ```
 
@@ -134,6 +137,8 @@ evidence rather than browsing independently.
 - Page language, visible word counts, internal/external link classification, link text, and form requirements
 - Deterministic checks for titles, descriptions, headings, indexability, canonicals, image alternatives,
   structured data, Open Graph metadata, and conversion actions
+- Deterministic business-model and conversion detection with a blocking context-conflict state
+- Explicit current-state, planned-funnel, and confirmed-override audit modes
 - Deterministic checks for thin visible content, form friction, generic actions, link availability, robots access,
   sitemap outcomes, and malformed structured data
 - Versioned agent brief/result contracts that exclude raw webpage text from specialist hand-offs
