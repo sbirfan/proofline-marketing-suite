@@ -4,6 +4,20 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-09-19
+
+### Fixed
+
+- Replaced the consultation-specific beginner prompt with placeholders and separate ecommerce, SaaS, and local
+  service examples
+- Audit skill now parses the target separately from context and stops for resolution when explicit context
+  materially conflicts with observed business or conversion evidence
+- Absence claims in the audit skill are explicitly limited to represented pages
+
+### Added
+
+- ShearStore-inspired synthetic context-integrity evaluation cases and release validation
+
 ## [2.0.0] - 2026-09-19
 
 ### Changed

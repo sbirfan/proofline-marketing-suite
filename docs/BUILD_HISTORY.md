@@ -19,6 +19,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Stable release | 1.0.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/stable-release` |
 | Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-rename` |
 | Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-v2` |
+| Context guide hotfix | 2.0.1 | Complete | 2026-09-19 | 2026-09-19 | `fix/context-guide-2.0.1` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -351,6 +352,24 @@ Breaking changes:
 
 - Removed the `svgai-marketing` command, `svgai_marketing` imports, `/svgai-marketing:*` commands, and legacy
   schema base identifiers after the 1.1 compatibility release
+
+## Phase 2.0.1 — Context Guide Hotfix
+
+Completed on 2026-09-19.
+
+Built:
+
+- Placeholder-based beginner prompt that cannot be mistaken for universal business context
+- Separate ecommerce, SaaS, and local-service examples
+- Audit-skill parsing that keeps the target URL distinct from optional user context
+- Explicit context-versus-evidence comparison and a stop-and-confirm rule for material conflicts
+- Page-scoped absence language and prohibition on scoring a brief conflict as a website defect
+- Synthetic ecommerce conflict, aligned checkout, and missing-context evaluation cases
+
+Quality record at phase completion:
+
+- All local gates, clean-wheel checks, GitHub CI, and CodeQL are required
+- The ShearStore regression must ask for resolution rather than recommend a consultation funnel
 
 ## Maintenance rule
 
