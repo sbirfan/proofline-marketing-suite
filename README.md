@@ -38,6 +38,12 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
 
+## Start here — no coding experience required
+
+Follow the [beginner setup and usage guide](docs/beginner-guide.md) for step-by-step Windows, macOS, and Linux
+instructions, your first website audit, PDF reporting, focused analysis commands, campaign drafting examples,
+and troubleshooting.
+
 ## Install for development
 
 ```bash
@@ -139,7 +145,8 @@ evidence rather than browsing independently.
 See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.md),
 [scoring](docs/scoring.md), [full marketing audit](docs/full-marketing-audit.md),
 [client reporting](docs/client-reporting.md), [security](docs/security.md),
-[skill catalog](docs/skills.md), [public beta guide](docs/public-beta.md), and
+[skill catalog](docs/skills.md), [beginner guide](docs/beginner-guide.md),
+[public beta guide](docs/public-beta.md), and
 [support policy](docs/support.md), [migration guide](docs/migration.md),
 [1.0 release notes](docs/release-notes-1.0.md), and [development](docs/development.md).
 
