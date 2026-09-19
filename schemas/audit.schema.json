@@ -20,6 +20,7 @@
     "agent_failures",
     "business_context",
     "context_assessment",
+    "evidence_scope",
     "competitive_evidence"
   ],
   "properties": {
@@ -69,6 +70,20 @@
         "supplied_conversion": { "type": ["string", "null"] },
         "conflicts": { "type": "array", "items": { "type": "string" } },
         "resolution_required": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "evidence_scope": {
+      "type": "object",
+      "required": ["collection_scope", "represented_urls", "discovered_urls", "unrepresented_discovered_count", "unavailable_urls", "absence_claim_scope", "sitewide_claims_supported"],
+      "properties": {
+        "collection_scope": { "const": "single_page" },
+        "represented_urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "discovered_urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "unrepresented_discovered_count": { "type": "integer", "minimum": 0 },
+        "unavailable_urls": { "type": "array", "items": { "type": "object" } },
+        "absence_claim_scope": { "const": "represented_pages_only" },
+        "sitewide_claims_supported": { "const": false }
       },
       "additionalProperties": false
     },

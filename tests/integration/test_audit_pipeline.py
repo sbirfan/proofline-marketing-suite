@@ -47,6 +47,8 @@ def test_audit_pipeline_uses_one_canonical_result(monkeypatch) -> None:
     assert "Marketing Audit" in report
     assert "Competitive" in report
     assert "not_tested" in report
+    assert result.evidence_scope["represented_urls"] == ["https://example.test"]
+    assert "Absence claims apply to represented pages only" in report
 
 
 def test_precollected_audit_with_specialists_can_be_complete() -> None:

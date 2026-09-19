@@ -4,6 +4,19 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-09-19
+
+### Added
+
+- Machine-readable evidence scope for represented, discovered, unrepresented, and unavailable URLs
+- Explicit page/resource claim scope on every deterministic finding
+- Evidence-scope summaries in Markdown reports and regression coverage for bounded absence claims
+
+### Changed
+
+- Site-wide absence support is explicitly false while collection remains single-page
+- Sitemap discovery is reported separately from page representation
+
 ## [2.1.0] - 2026-09-19
 
 ### Added

@@ -3,7 +3,7 @@
   "$id": "https://proofline.example/schemas/finding.schema.json",
   "title": "Audit Finding",
   "type": "object",
-  "required": ["id", "category", "severity", "claim", "evidence", "confidence", "kind"],
+  "required": ["id", "category", "severity", "claim", "evidence", "confidence", "kind", "claim_scope"],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_.-]+$" },
     "category": { "enum": ["content", "conversion", "seo", "competitive", "brand", "growth"] },
@@ -26,8 +26,8 @@
     },
     "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
     "recommendation": { "type": ["string", "null"] },
-    "kind": { "enum": ["observed_fact", "model_interpretation", "recommendation", "estimate"] }
+    "kind": { "enum": ["observed_fact", "model_interpretation", "recommendation", "estimate"] },
+    "claim_scope": { "enum": ["page", "resource", "site"] }
   },
   "additionalProperties": false
 }
-

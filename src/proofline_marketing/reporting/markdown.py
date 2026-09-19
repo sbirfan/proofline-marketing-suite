@@ -20,6 +20,20 @@ def render_markdown(result: AuditResult) -> str:
         f"- Coverage: {result.coverage:.0%}",
         "",
     ]
+    scope = result.evidence_scope
+    lines.extend(
+        [
+            "## Evidence scope",
+            "",
+            f"- Collection scope: {scope.get('collection_scope', 'single_page')}",
+            f"- Represented pages: {len(scope.get('represented_urls', []))}",
+            f"- Discovered but unrepresented pages: "
+            f"{scope.get('unrepresented_discovered_count', 0)}",
+            "- Absence claims apply to represented pages only.",
+            "- Site-wide absence claims supported: no",
+            "",
+        ]
+    )
     assessment = result.context_assessment
     lines.extend(
         [
@@ -75,6 +89,7 @@ def render_markdown(result: AuditResult) -> str:
                 f"- Category: {finding.category}",
                 f"- Severity: {finding.severity}",
                 f"- Confidence: {finding.confidence:.0%}",
+                f"- Claim scope: {finding.claim_scope}",
                 f"- Evidence: {finding.evidence[0].url} — `{finding.evidence[0].selector}`",
                 f"- Recommendation: {finding.recommendation or 'None'}",
                 "",
