@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {"id": "ecommerce-consultation-conflict", "site_signals": ["product prices", "add to cart", "checkout"], "supplied_offer": "free consultation", "supplied_conversion": "book a consultation", "expected_action": "ask_for_resolution", "must_not_claim": "missing consultation is a website defect"},
+    {"id": "ecommerce-checkout-aligned", "site_signals": ["product prices", "add to cart", "checkout"], "supplied_offer": "professional shears", "supplied_conversion": "complete a purchase", "expected_action": "continue_current_state_audit", "must_not_claim": "consultation funnel required"},
+    {"id": "missing-context", "site_signals": ["request a quote", "services"], "supplied_offer": null, "supplied_conversion": null, "expected_action": "continue_with_unknown_context", "must_not_claim": "example context is user confirmed"}
+  ]
+}
