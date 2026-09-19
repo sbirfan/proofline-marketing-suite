@@ -17,6 +17,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/campaign-capabilities` |
 | Public beta | 0.9.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/public-beta` |
 | Stable release | 1.0.0 | Complete | 2026-09-18 | 2026-09-18 | `feature/stable-release` |
+| Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-rename` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -301,6 +302,31 @@ Known limits retained deliberately:
 - Single-primary-page audit scheduling, opt-in rendering, and caller-provided specialist execution
 - No provider-specific publishing, authenticated crawling, or automatic external-account mutation
 - No guarantee of rankings, regulatory compliance, accessibility compliance, or revenue impact
+
+## Phase 1.1.0 — Proofline Compatibility Rename
+
+Completed on 2026-09-19.
+
+Built:
+
+- Proofline Marketing Suite product, repository, diagnostic, report, and HTTP user-agent branding
+- `proofline` as the primary CLI with `svgai-marketing` retained as a compatible 1.x alias
+- `proofline-marketing-suite` distribution metadata and updated installation guidance
+- A migration matrix for repository, distribution, CLI, Python, Claude plugin, and schema identifiers
+- Explicit preservation of the `svgai_marketing` Python namespace, `/svgai-marketing:*` plugin namespace, and
+  existing schema IDs until a major release can change them safely
+- Updated README, beginner guide, changelog, support material, tests, CI smoke checks, and release validation
+
+Quality record at phase completion:
+
+- Both primary and compatibility CLI commands must pass installed-wheel smoke tests
+- All standard local gates, GitHub CI, and CodeQL are required before both merges
+
+Deferred to 2.0:
+
+- `proofline_marketing` Python namespace
+- `/proofline:*` Claude plugin namespace
+- Removal of deprecated SVG AI technical aliases
 
 ## Maintenance rule
 

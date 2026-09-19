@@ -19,6 +19,10 @@ def main() -> int:
     match = re.search(r'^__version__ = "([^"]+)"$', package, re.MULTILINE)
     assert match, "package version is missing"
     assert manifest["version"] == expected == match.group(1), "release versions differ"
+    assert project["project"]["name"] == "proofline-marketing-suite"
+    scripts = project["project"]["scripts"]
+    assert scripts["proofline"] == scripts["svgai-marketing"]
+    assert manifest["repository"].endswith("/sbirfan/proofline-marketing-suite")
     if expected.startswith("1."):
         classifiers = project["project"]["classifiers"]
         assert "Development Status :: 5 - Production/Stable" in classifiers

@@ -16,3 +16,7 @@ def test_parser_exposes_stable_commands() -> None:
     audit = parser.parse_args(["audit", "https://example.test/"])
     assert audit.command == "audit"
     assert audit.format == "markdown"
+
+
+def test_primary_program_name_is_proofline() -> None:
+    assert cli.build_parser().prog == "proofline"

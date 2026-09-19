@@ -11,7 +11,7 @@ from ..models import AuditResult
 
 @dataclass(slots=True, frozen=True)
 class ReportBrand:
-    name: str = "SVG AI Marketing Suite"
+    name: str = "Proofline Marketing Suite"
     primary_color: str = "#17324d"
     accent_color: str = "#0f766e"
     footer: str = "Evidence-first marketing audit"

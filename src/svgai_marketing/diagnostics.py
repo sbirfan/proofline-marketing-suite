@@ -50,7 +50,7 @@ def render_diagnostics(report: DiagnosticReport, *, as_json: bool = False) -> st
     )
     return "\n".join(
         (
-            f"SVG AI Marketing Suite {report.version}",
+            f"Proofline Marketing Suite {report.version}",
             f"Python {report.python} ({'supported' if report.supported_python else 'unsupported'})",
             f"Platform: {report.platform}",
             f"Optional extras: {extras}",
