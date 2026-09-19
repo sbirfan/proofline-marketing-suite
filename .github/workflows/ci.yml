@@ -43,6 +43,8 @@ jobs:
       - run: .package-smoke/bin/python -m pip install dist/*.whl
       - run: .package-smoke/bin/svgai-marketing --help
       - run: .package-smoke/bin/svgai-marketing doctor --json
+      - run: .package-smoke/bin/proofline --help
+      - run: .package-smoke/bin/proofline doctor --json
       - run: .package-smoke/bin/python -m pip install ".[browser]"
       - run: .package-smoke/bin/python -c "from playwright.sync_api import sync_playwright; assert sync_playwright"
       - run: .package-smoke/bin/python -m pip install ".[reports]"

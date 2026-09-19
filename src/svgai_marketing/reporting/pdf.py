@@ -36,7 +36,7 @@ def render_pdf(
         )
     except ImportError as error:
         raise RuntimeError(
-            "PDF output requires: pip install 'svgai-marketing-suite[reports]'"
+            "PDF output requires: pip install 'proofline-marketing-suite[reports]'"
         ) from error
 
     brand = brand or ReportBrand()
@@ -108,7 +108,7 @@ def render_pdf(
         bottomMargin=18 * mm,
         title="Marketing Audit",
         author=brand.name,
-        creator="SVG AI Marketing Suite",
+        creator="Proofline Marketing Suite",
     )
     frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="content")
     doc.addPageTemplates(PageTemplate(id="report", frames=[frame], onPage=page_chrome))

@@ -1,4 +1,4 @@
-# SVG AI Marketing Suite 1.0
+# Proofline Marketing Suite 1.0
 
 Version 1.0 is the first stable release of the evidence-first audit and marketing workflow suite. It combines
 bounded public-page collection, explicit observation states, deterministic findings and scoring, structured

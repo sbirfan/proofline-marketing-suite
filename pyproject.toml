@@ -3,8 +3,8 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [project]
-name = "svgai-marketing-suite"
-version = "1.0.0"
+name = "proofline-marketing-suite"
+version = "1.1.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -38,6 +38,7 @@ dev = [
 ]
 
 [project.scripts]
+proofline = "svgai_marketing.cli:main"
 svgai-marketing = "svgai_marketing.cli:main"
 
 [tool.hatch.build.targets.wheel]

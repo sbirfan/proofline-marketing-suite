@@ -14,7 +14,7 @@ def render_html(url: str, *, timeout_ms: int = 20_000) -> str:
         from playwright.sync_api import sync_playwright  # type: ignore[import-not-found]
     except ImportError as error:
         raise RuntimeError(
-            "Install svgai-marketing-suite[browser] and Playwright Chromium"
+            "Install proofline-marketing-suite[browser] and Playwright Chromium"
         ) from error
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)

@@ -9,8 +9,8 @@ Install the PDF dependency and generate reports:
 
 ```bash
 python -m pip install -e ".[reports]"
-svgai-marketing audit https://example.com --format html --output report.html
-svgai-marketing audit https://example.com --format pdf --output report.pdf
+proofline audit https://example.com --format html --output report.html
+proofline audit https://example.com --format pdf --output report.pdf
 ```
 
 `ReportBrand` configures the client name, primary color, accent color, and footer without changing audit

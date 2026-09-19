@@ -18,7 +18,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from ..models import FetchObservation, ObservationStatus
 
 DEFAULT_USER_AGENT = (
-    "SVG-AI-Marketing-Audit/0.4 (+https://github.com/sbirfan/svgai-marketing-suite)"
+    "Proofline-Marketing-Audit/1.1 (+https://github.com/sbirfan/proofline-marketing-suite)"
 )
 MAX_URL_LENGTH = 8_192
 MAX_REDIRECTS = 5
