@@ -13,7 +13,7 @@ from .reporting import render_html, render_markdown, render_pdf
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="svgai-marketing")
+    parser = argparse.ArgumentParser(prog="proofline")
     sub = parser.add_subparsers(dest="command", required=True)
     doctor = sub.add_parser("doctor", help="Report local runtime and optional capabilities")
     doctor.add_argument("--json", action="store_true", help="Emit machine-readable diagnostics")

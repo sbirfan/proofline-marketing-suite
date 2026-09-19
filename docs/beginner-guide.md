@@ -1,4 +1,4 @@
-# SVG AI Marketing Suite: beginner setup and usage guide
+# Proofline Marketing Suite: beginner setup and usage guide
 
 This guide is for marketers, freelancers, business owners, and agency teams. You do not need to know how to
 code. You will copy a few commands into a terminal, then use plain-language slash commands inside Claude Code.
@@ -38,13 +38,13 @@ to `PATH` if it is offered.
 3. Copy the command below, paste it into the terminal, and press **Enter**:
 
 ```bash
-git clone https://github.com/sbirfan/svgai-marketing-suite.git
+git clone https://github.com/sbirfan/proofline-marketing-suite.git
 ```
 
 4. Open the downloaded folder:
 
 ```bash
-cd svgai-marketing-suite
+cd proofline-marketing-suite
 ```
 
 If Visual Studio Code asks whether you trust the folder, review the repository address and choose **Yes, I
@@ -63,7 +63,7 @@ py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -e ".[reports]"
-svgai-marketing doctor
+proofline doctor
 ```
 
 If `py -3` is not recognized, try `python -m venv .venv`. If PowerShell blocks activation, open a normal
@@ -78,7 +78,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e ".[reports]"
-svgai-marketing doctor
+proofline doctor
 ```
 
 A successful check shows the suite version, your Python version, your operating system, and
@@ -97,7 +97,7 @@ Browser installation can take several minutes and uses additional disk space.
 
 ## Part 3 — Start Claude Code with the marketing suite
 
-Keep the terminal inside the `svgai-marketing-suite` folder and run:
+Keep the terminal inside the `proofline-marketing-suite` folder and run:
 
 ```bash
 claude --plugin-dir .
@@ -111,6 +111,9 @@ Claude Code opens in the terminal. Type the following command and press **Enter*
 
 If the health command appears and completes, the plugin is loaded. You can type `/svgai-marketing:` to view
 the available suite commands.
+
+The product is named Proofline, but the compatible 1.x Claude command namespace remains
+`/svgai-marketing:*`. It will move to `/proofline:*` only in a future major release.
 
 ## Part 4 — Run your first website audit
 
@@ -158,19 +161,19 @@ You can also run the deterministic audit tool without opening Claude Code.
 ### Easy-to-read Markdown report
 
 ```bash
-svgai-marketing audit https://example.com --format markdown --output report.md
+proofline audit https://example.com --format markdown --output report.md
 ```
 
 ### Client-ready PDF report
 
 ```bash
-svgai-marketing audit https://example.com --format pdf --output report.pdf
+proofline audit https://example.com --format pdf --output report.pdf
 ```
 
 ### Web-page report
 
 ```bash
-svgai-marketing audit https://example.com --format html --output report.html
+proofline audit https://example.com --format html --output report.html
 ```
 
 ### JavaScript-heavy page
@@ -178,10 +181,10 @@ svgai-marketing audit https://example.com --format html --output report.html
 Use this only after installing the optional browser support:
 
 ```bash
-svgai-marketing audit https://example.com --browser-fallback --format pdf --output report.pdf
+proofline audit https://example.com --browser-fallback --format pdf --output report.pdf
 ```
 
-The new files appear in the `svgai-marketing-suite` folder. In Visual Studio Code, use the file list on the
+The new files appear in the `proofline-marketing-suite` folder. In Visual Studio Code, use the file list on the
 left to open them. PDF output requires the `reports` extra installed in Part 2.
 
 ## Part 6 — Use a focused analysis skill
@@ -280,7 +283,7 @@ Always verify claims, prices, consent, legal language, dates, and client details
 The program is either not installed or your terminal has not picked up the new installation. Close and reopen
 Visual Studio Code. If the message remains, reinstall the named program and enable its PATH option.
 
-### `svgai-marketing` is not recognized
+### `proofline` is not recognized
 
 Return to the repository folder and activate the environment again:
 
@@ -294,7 +297,7 @@ Return to the repository folder and activate the environment again:
 source .venv/bin/activate
 ```
 
-Then run `svgai-marketing doctor`.
+Then run `proofline doctor`.
 
 ### PDF output says the reporting dependency is missing
 
@@ -326,7 +329,7 @@ Open a terminal in the repository folder, activate the environment, and run:
 ```bash
 git pull
 python -m pip install -e ".[reports]"
-svgai-marketing doctor
+proofline doctor
 ```
 
 If Git reports local changes, stop and make a backup before proceeding.
@@ -341,5 +344,5 @@ If Git reports local changes, stop and make a backup before proceeding.
 - Publishing, sending, signing, purchasing, invoicing, budget changes, and account mutations require a separate,
   explicit approval outside the drafting step.
 
-You are ready when `svgai-marketing doctor` reports a supported Python version, `/svgai-marketing:health`
+You are ready when `proofline doctor` reports a supported Python version, `/svgai-marketing:health`
 works in Claude Code, and you can create a report from a public test website.

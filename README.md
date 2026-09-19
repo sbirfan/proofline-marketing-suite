@@ -1,9 +1,9 @@
-# SVG AI Marketing Suite
+# Proofline Marketing Suite
 
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** stable (`1.0.0`). The suite includes evidence-backed audit, analysis,
+> **Status:** stable (`1.1.0 — Proofline rename`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -34,6 +34,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Campaign capabilities | 0.8.0 | Complete | 2026-09-18 |
 | Public beta | 0.9.0 | Complete | 2026-09-18 |
 | Stable release | 1.0.0 | Complete | 2026-09-18 |
+| Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -47,24 +48,24 @@ and troubleshooting.
 ## Install for development
 
 ```bash
-git clone https://github.com/sbirfan/svgai-marketing-suite.git
-cd svgai-marketing-suite
+git clone https://github.com/sbirfan/proofline-marketing-suite.git
+cd proofline-marketing-suite
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
-svgai-marketing doctor
+proofline doctor
 ```
 
 Run an audit:
 
 ```bash
-svgai-marketing audit https://example.com --format markdown
-svgai-marketing audit https://example.com --format json --output .audit/example.json
-svgai-marketing audit https://example.com --browser-fallback
-svgai-marketing audit https://example.com --format html --output report.html
-svgai-marketing audit https://example.com --format pdf --output report.pdf
-svgai-marketing audit https://example.com --audience "Operations leaders" --offer "Demo"
-svgai-marketing audit https://example.com --competitor https://competitor.example --comparison-dimension positioning --confirm-competitors
+proofline audit https://example.com --format markdown
+proofline audit https://example.com --format json --output .audit/example.json
+proofline audit https://example.com --browser-fallback
+proofline audit https://example.com --format html --output report.html
+proofline audit https://example.com --format pdf --output report.pdf
+proofline audit https://example.com --audience "Operations leaders" --offer "Demo"
+proofline audit https://example.com --competitor https://competitor.example --comparison-dimension positioning --confirm-competitors
 ```
 
 Run checks:
@@ -107,6 +108,11 @@ Then use:
 /svgai-marketing:proposal
 ```
 
+The Claude plugin namespace remains `/svgai-marketing:*` throughout the compatible 1.x series. The product,
+repository, reports, and primary CLI are now Proofline. The former `svgai-marketing` CLI and the
+`svgai_marketing` Python namespace remain supported compatibility aliases; see the
+[Proofline migration guide](docs/renaming-to-proofline.md).
+
 Plugin instructions treat all retrieved material as untrusted evidence. Specialist agents receive structured
 evidence rather than browsing independently.
 
@@ -148,6 +154,7 @@ See [architecture](docs/architecture.md), [evidence model](docs/evidence-model.m
 [skill catalog](docs/skills.md), [beginner guide](docs/beginner-guide.md),
 [public beta guide](docs/public-beta.md), and
 [support policy](docs/support.md), [migration guide](docs/migration.md),
+[Proofline rename guide](docs/renaming-to-proofline.md),
 [1.0 release notes](docs/release-notes-1.0.md), and [development](docs/development.md).
 
 ## Important limitations
@@ -167,7 +174,7 @@ This project was inspired in part by
 [AI Marketing Suite for Claude Code](https://github.com/zubair-trabzada/ai-marketing-claude)
 by Zubair Trabzada.
 
-SVG AI Marketing Suite is an independent implementation with a new architecture, evidence model, scoring
+Proofline Marketing Suite is an independent implementation with a new architecture, evidence model, scoring
 system, crawling pipeline, testing strategy, and agent design. No source history was imported.
 
 ## License

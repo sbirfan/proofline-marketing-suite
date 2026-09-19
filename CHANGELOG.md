@@ -4,10 +4,26 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-19
+
 ### Added
 
 - Beginner-friendly Windows, macOS, and Linux setup and usage guide with first-audit, PDF reporting, focused
   analysis, campaign drafting, troubleshooting, update, and safety instructions
+- `proofline` primary CLI alongside the compatible `svgai-marketing` command
+- Proofline rename and upgrade guide covering repository, distribution, CLI, Python, plugin, and schema names
+
+### Changed
+
+- Product and report branding renamed to Proofline Marketing Suite
+- Repository and installation references moved to `sbirfan/proofline-marketing-suite`
+- Distribution and plugin versions advanced to 1.1.0
+- HTTP user agent and optional-dependency guidance updated to Proofline
+
+### Compatibility
+
+- The `svgai_marketing` Python namespace, `/svgai-marketing:*` Claude namespace, and schema identifiers remain
+  unchanged throughout 1.x
 
 ## [1.0.0] - 2026-09-18
 
