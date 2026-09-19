@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/agent-brief.schema.json",
+  "$id": "https://proofline.example/schemas/agent-brief.schema.json",
   "title": "Specialist Agent Brief",
   "type": "object",
   "required": ["schema_version", "agent", "category", "policy", "target_url", "collection_status", "render_mode", "finding_ids", "evidence_urls", "limitations", "prohibited_actions", "required_dimensions", "structured_evidence", "business_context", "comparison_evidence"],

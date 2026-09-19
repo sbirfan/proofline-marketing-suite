@@ -1,26 +1,24 @@
-# Renaming to Proofline
+# Migrating to Proofline 2.0
 
-Version 1.1 renames SVG AI Marketing Suite to **Proofline Marketing Suite**. The new name describes the
-project's evidence-first purpose and avoids confusion with SVG image tools.
+Proofline 2.0 completes the rename from SVG AI Marketing Suite. Version 1.1 introduced the new product,
+repository, distribution, and CLI while retaining compatibility aliases. Version 2.0 moves the remaining
+technical namespaces to Proofline and removes those aliases.
 
-## What changes in 1.1
+## Namespace changes
 
-| Area | New primary name | 1.x compatibility behavior |
+| Area | Version 1.x | Version 2.0 |
 |---|---|---|
-| Product | Proofline Marketing Suite | Old prose name is retired |
-| Repository | `sbirfan/proofline-marketing-suite` | GitHub redirects the previous repository URL |
-| Distribution | `proofline-marketing-suite` | Install the new distribution name |
-| Command line | `proofline` | `svgai-marketing` remains available |
-| Python imports | Planned `proofline_marketing` for 2.0 | `svgai_marketing` remains canonical in 1.x |
-| Claude plugin | Planned `/proofline:*` for 2.0 | `/svgai-marketing:*` remains available in 1.x |
+| Repository | `sbirfan/proofline-marketing-suite` | unchanged |
+| Distribution | `proofline-marketing-suite` | unchanged |
+| Command line | `proofline` and legacy `svgai-marketing` | `proofline` only |
+| Python imports | `svgai_marketing` | `proofline_marketing` |
+| Claude plugin | `/svgai-marketing:*` | `/proofline:*` |
+| Schema base ID | `https://svgai.example/schemas/` | `https://proofline.example/schemas/` |
 
-The Python and Claude namespaces remain unchanged because changing them would break documented 1.0
-integrations. The compatibility period provides time for scripts, examples, and saved workflows to move to the
-new CLI and repository without losing functionality.
+Audit observation states and score algorithm 5.0 are unchanged. The schema ID change is breaking for registries
+that key documents by `$id`; update those registrations before accepting 2.0 payloads.
 
-## Upgrade
-
-Update an existing clone:
+## Upgrade an existing clone
 
 ```bash
 git remote set-url origin https://github.com/sbirfan/proofline-marketing-suite.git
@@ -29,25 +27,35 @@ python -m pip install -e ".[reports]"
 proofline doctor
 ```
 
-New clones should use:
+Restart Claude Code from the repository folder:
 
 ```bash
-git clone https://github.com/sbirfan/proofline-marketing-suite.git
-cd proofline-marketing-suite
-python -m venv .venv
-python -m pip install -e ".[reports]"
-proofline doctor
+claude --plugin-dir .
 ```
 
-Commands can be migrated mechanically:
+Then verify:
 
 ```text
-svgai-marketing doctor  → proofline doctor
-svgai-marketing audit   → proofline audit
+/proofline:health
 ```
 
-Do not change `import svgai_marketing` or `/svgai-marketing:*` commands during the 1.x series. Their replacements
-will be introduced with a major-version migration rather than silently breaking existing users.
+## Update scripts and integrations
 
-No schema identifiers, observation states, or score algorithms change in 1.1. Schema IDs retain their existing
-`svgai.example` identifiers to preserve reference resolution for stored 1.x documents.
+Make these replacements:
+
+```text
+svgai-marketing       → proofline
+svgai_marketing       → proofline_marketing
+/svgai-marketing:     → /proofline:
+https://svgai.example → https://proofline.example
+```
+
+For example:
+
+```python
+from proofline_marketing.models import AuditResult
+from proofline_marketing.reporting import render_pdf
+```
+
+There is no automatic import alias in 2.0. This prevents new integrations from silently depending on the
+retired identity and makes missing migrations fail clearly during testing.

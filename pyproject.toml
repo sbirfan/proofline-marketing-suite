@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "proofline-marketing-suite"
-version = "1.1.0"
+version = "2.0.0"
 description = "Evidence-first marketing audits for Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -38,11 +38,10 @@ dev = [
 ]
 
 [project.scripts]
-proofline = "svgai_marketing.cli:main"
-svgai-marketing = "svgai_marketing.cli:main"
+proofline = "proofline_marketing.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/svgai_marketing"]
+packages = ["src/proofline_marketing"]
 
 [tool.hatch.build]
 exclude = [
@@ -77,4 +76,4 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-packages = ["svgai_marketing"]
+packages = ["proofline_marketing"]

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://svgai.example/schemas/skill-output.schema.json",
+  "$id": "https://proofline.example/schemas/skill-output.schema.json",
   "title": "Analysis Skill Output",
   "type": "object",
   "required": ["schema_version", "skill", "target_url", "facts", "interpretations", "recommendations", "limitations", "sources"],

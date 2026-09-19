@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from svgai_marketing.crawler.html import parse_html
+from proofline_marketing.crawler.html import parse_html
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "sites"
 

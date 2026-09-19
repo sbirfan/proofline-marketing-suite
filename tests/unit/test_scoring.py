@@ -1,4 +1,4 @@
-from svgai_marketing.models import (
+from proofline_marketing.models import (
     EvidenceDocument,
     FetchObservation,
     Finding,
@@ -6,7 +6,7 @@ from svgai_marketing.models import (
     PageEvidence,
     Severity,
 )
-from svgai_marketing.scoring.engine import calculate_scores, synthesize_specialist_scores
+from proofline_marketing.scoring.engine import calculate_scores, synthesize_specialist_scores
 
 
 def evidence(status: ObservationStatus) -> EvidenceDocument:

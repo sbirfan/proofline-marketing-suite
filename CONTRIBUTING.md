@@ -9,7 +9,7 @@ Use a focused branch and open a pull request against `develop` once that integra
 python -m pip install -e ".[dev]"
 ruff check .
 mypy src
-pytest --cov=svgai_marketing
+pytest --cov=proofline_marketing
 python scripts/validate_release.py
 python -m build
 ```

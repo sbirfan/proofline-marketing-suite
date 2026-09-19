@@ -1,10 +1,10 @@
 # Support policy
 
-Proofline Marketing Suite 1.x supports CPython 3.11, 3.12, and 3.13 on Linux, macOS, and Windows. The core package
+Proofline Marketing Suite 2.x supports CPython 3.11, 3.12, and 3.13 on Linux, macOS, and Windows. The core package
 uses the Python standard library. The `browser` and `reports` extras are optional; their upstream system
 requirements also apply.
 
-Patch releases receive compatible bug and security fixes. Minor 1.x releases may add functionality without
+Patch releases receive compatible bug and security fixes. Minor 2.x releases may add functionality without
 intentionally breaking the documented CLI, skill names, or versioned output contracts. A deprecation is
 documented in the changelog for at least one minor release before removal. Breaking contract changes require a
 new major package version, except when an urgent security fix cannot safely preserve the old behavior.

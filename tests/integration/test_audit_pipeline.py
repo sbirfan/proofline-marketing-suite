@@ -1,15 +1,15 @@
 from pathlib import Path
 
-from svgai_marketing.crawler.http import FetchResult
-from svgai_marketing.models import (
+from proofline_marketing.crawler.http import FetchResult
+from proofline_marketing.models import (
     BusinessContext,
     EvidenceDocument,
     FetchObservation,
     ObservationStatus,
     PageEvidence,
 )
-from svgai_marketing.orchestrator import run_audit
-from svgai_marketing.reporting.markdown import render_markdown
+from proofline_marketing.orchestrator import run_audit
+from proofline_marketing.reporting.markdown import render_markdown
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "sites"
 
@@ -36,7 +36,7 @@ def test_audit_pipeline_uses_one_canonical_result(monkeypatch) -> None:
             html,
         )
 
-    monkeypatch.setattr("svgai_marketing.crawler.http.SafeHttpClient.fetch", fake_fetch)
+    monkeypatch.setattr("proofline_marketing.crawler.http.SafeHttpClient.fetch", fake_fetch)
     result = run_audit("example.test")
     report = render_markdown(result)
 

@@ -1,4 +1,4 @@
-from svgai_marketing.security import (
+from proofline_marketing.security import (
     UNTRUSTED_CONTENT_POLICY,
     redact_text,
     redact_url,

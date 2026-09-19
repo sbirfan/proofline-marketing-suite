@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from svgai_marketing.models import (
+from proofline_marketing.models import (
     AuditResult,
     CategoryScore,
     EvidenceDocument,
@@ -12,7 +12,7 @@ from svgai_marketing.models import (
     ObservationStatus,
     Severity,
 )
-from svgai_marketing.reporting import ReportBrand, render_html, render_pdf
+from proofline_marketing.reporting import ReportBrand, render_html, render_pdf
 
 pypdf = pytest.importorskip("pypdf")
 

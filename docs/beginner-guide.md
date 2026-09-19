@@ -106,14 +106,13 @@ claude --plugin-dir .
 Claude Code opens in the terminal. Type the following command and press **Enter**:
 
 ```text
-/svgai-marketing:health
+/proofline:health
 ```
 
-If the health command appears and completes, the plugin is loaded. You can type `/svgai-marketing:` to view
+If the health command appears and completes, the plugin is loaded. You can type `/proofline:` to view
 the available suite commands.
 
-The product is named Proofline, but the compatible 1.x Claude command namespace remains
-`/svgai-marketing:*`. It will move to `/proofline:*` only in a future major release.
+Proofline 2.0 uses the `/proofline:*` Claude command namespace shown above.
 
 ## Part 4 — Run your first website audit
 
@@ -121,7 +120,7 @@ Use a public website you own, manage, or have permission to review. Replace `htt
 website address:
 
 ```text
-/svgai-marketing:audit https://example.com
+/proofline:audit https://example.com
 ```
 
 Claude may ask for permission before reading a public page or creating a local report. Read each request and
@@ -143,7 +142,7 @@ Do not describe a blocked, failed, render-required, or not-tested result as proo
 Give Claude business context so it does not have to leave important categories untested:
 
 ```text
-/svgai-marketing:audit https://example.com
+/proofline:audit https://example.com
 
 Audience: owners of small service businesses
 Offer: a free 30-minute consultation
@@ -193,17 +192,17 @@ You do not need to run every skill. Choose the one that matches the job:
 
 | Command | Use it when you want to… | Information to provide |
 |---|---|---|
-| `/svgai-marketing:seo` | review indexing, metadata, links, and schema | website URL or saved audit evidence |
-| `/svgai-marketing:landing` | improve a landing page and form | audience, offer, primary conversion |
-| `/svgai-marketing:competitors` | compare confirmed competitors | competitor URLs and comparison topics |
-| `/svgai-marketing:brand` | review clarity, consistency, proof, and trust | audited material and brand context |
-| `/svgai-marketing:funnel` | find journey and measurement gaps | funnel stages and conversion goals |
-| `/svgai-marketing:report` | turn a saved audit into a report | path to the saved audit JSON |
+| `/proofline:seo` | review indexing, metadata, links, and schema | website URL or saved audit evidence |
+| `/proofline:landing` | improve a landing page and form | audience, offer, primary conversion |
+| `/proofline:competitors` | compare confirmed competitors | competitor URLs and comparison topics |
+| `/proofline:brand` | review clarity, consistency, proof, and trust | audited material and brand context |
+| `/proofline:funnel` | find journey and measurement gaps | funnel stages and conversion goals |
+| `/proofline:report` | turn a saved audit into a report | path to the saved audit JSON |
 
 Example landing-page request:
 
 ```text
-/svgai-marketing:landing https://example.com
+/proofline:landing https://example.com
 
 Audience: first-time home buyers
 Offer: mortgage-readiness consultation
@@ -214,7 +213,7 @@ Identify the five highest-impact improvements. Separate observed facts from reco
 Example competitor request:
 
 ```text
-/svgai-marketing:competitors https://example.com
+/proofline:competitors https://example.com
 
 Confirmed competitors:
 - https://competitor-one.example
@@ -229,17 +228,17 @@ Campaign commands create review-ready drafts. They do not publish or send anythi
 
 | Command | Creates | Important context |
 |---|---|---|
-| `/svgai-marketing:copy` | copy variants | channel, audience, offer, goal, approved claims |
-| `/svgai-marketing:emails` | email sequences | permission basis, sender, cadence, offer |
-| `/svgai-marketing:social` | organic posts | platform, voice, goal, approved claims |
-| `/svgai-marketing:ads` | ad concepts and tests | channel, budget context, exclusions, measurement |
-| `/svgai-marketing:launch` | phased launch plan | timing, owners, dependencies, risks |
-| `/svgai-marketing:proposal` | services proposal | client, scope, pricing inputs, approvals |
+| `/proofline:copy` | copy variants | channel, audience, offer, goal, approved claims |
+| `/proofline:emails` | email sequences | permission basis, sender, cadence, offer |
+| `/proofline:social` | organic posts | platform, voice, goal, approved claims |
+| `/proofline:ads` | ad concepts and tests | channel, budget context, exclusions, measurement |
+| `/proofline:launch` | phased launch plan | timing, owners, dependencies, risks |
+| `/proofline:proposal` | services proposal | client, scope, pricing inputs, approvals |
 
 Example email request:
 
 ```text
-/svgai-marketing:emails
+/proofline:emails
 
 Audience: existing customers who explicitly subscribed to product updates
 Sender: SVG Example Company
@@ -253,7 +252,7 @@ Draft only. Do not upload a list, configure automation, or send messages.
 Example proposal request:
 
 ```text
-/svgai-marketing:proposal
+/proofline:proposal
 
 Client: Example Company
 Goal: improve qualified demo bookings
@@ -268,7 +267,7 @@ Always verify claims, prices, consent, legal language, dates, and client details
 
 ## A simple first-week workflow
 
-1. Run `/svgai-marketing:health`.
+1. Run `/proofline:health`.
 2. Audit your own website with audience, offer, and conversion context.
 3. Read the evidence status, confidence, and coverage before the score.
 4. Use `/seo` or `/landing` for one focused follow-up.
@@ -344,5 +343,5 @@ If Git reports local changes, stop and make a backup before proceeding.
 - Publishing, sending, signing, purchasing, invoicing, budget changes, and account mutations require a separate,
   explicit approval outside the drafting step.
 
-You are ready when `proofline doctor` reports a supported Python version, `/svgai-marketing:health`
+You are ready when `proofline doctor` reports a supported Python version, `/proofline:health`
 works in Claude Code, and you can create a report from a public test website.
