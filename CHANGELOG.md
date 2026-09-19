@@ -4,6 +4,11 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+### Added
+
+- Beginner-friendly Windows, macOS, and Linux setup and usage guide with first-audit, PDF reporting, focused
+  analysis, campaign drafting, troubleshooting, update, and safety instructions
+
 ## [1.0.0] - 2026-09-18
 
 ### Added

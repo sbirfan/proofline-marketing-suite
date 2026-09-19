@@ -308,3 +308,13 @@ Every phase pull request must update this file, the README capability/limitation
 the package/plugin version when applicable. A phase is marked complete only after local quality gates and the
 configured GitHub CI pass. The feature PR is then merged to `develop`, post-merge CI is verified, and the
 release PR is merged to `main` before work begins on the next phase.
+
+## Post-1.0 documentation updates
+
+### 2026-09-19 — Beginner guide
+
+- Added a no-code-oriented setup path for Windows, macOS, and Linux
+- Added ready-to-copy first-audit, PDF, focused-analysis, email, and proposal examples
+- Documented installation checks, optional browser rendering, common errors, safe updating, evidence-state
+  interpretation, permissions, and external-action approval boundaries
+- Linked the guide prominently from the README
