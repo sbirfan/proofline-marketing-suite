@@ -19,11 +19,41 @@ def render_markdown(result: AuditResult) -> str:
         f"- Confidence: {result.confidence:.0%}",
         f"- Coverage: {result.coverage:.0%}",
         "",
-        "## Category scores",
-        "",
-        "| Category | Score | Confidence | Coverage | Status |",
-        "|---|---:|---:|---:|---|",
     ]
+    assessment = result.context_assessment
+    lines.extend(
+        [
+            "## Context integrity",
+            "",
+            f"- Audit mode: {assessment.get('audit_mode', 'current_state')}",
+            f"- Status: {assessment.get('status', 'unknown')}",
+            f"- Observed business model: {assessment.get('observed_business_model', 'unknown')}",
+            "- Observed conversions: " + ", ".join(assessment.get("observed_conversions", []))
+            if assessment.get("observed_conversions")
+            else "- Observed conversions: none detected",
+        ]
+    )
+    for conflict in assessment.get("conflicts", []):
+        lines.append(f"- Conflict: {conflict}")
+    if assessment.get("resolution_required"):
+        lines.extend(
+            [
+                "",
+                "**Report generation stopped.** Correct the supplied context or explicitly select "
+                "`planned_funnel` or `confirmed_override` mode.",
+                "",
+            ]
+        )
+        return "\n".join(lines)
+    lines.extend(
+        [
+            "",
+            "## Category scores",
+            "",
+            "| Category | Score | Confidence | Coverage | Status |",
+            "|---|---:|---:|---:|---|",
+        ]
+    )
     for name, category in result.categories.items():
         category_score = "—" if category.score is None else f"{category.score:.1f}"
         lines.append(

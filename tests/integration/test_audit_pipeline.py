@@ -2,6 +2,7 @@ from pathlib import Path
 
 from proofline_marketing.crawler.http import FetchResult
 from proofline_marketing.models import (
+    AuditMode,
     BusinessContext,
     EvidenceDocument,
     FetchObservation,
@@ -97,3 +98,38 @@ def test_precollected_audit_with_specialists_can_be_complete() -> None:
     assert result.status == "complete"
     assert result.categories["growth"].score == 70
     assert not result.agent_failures
+
+
+def test_context_conflict_stops_specialists_and_final_report() -> None:
+    evidence = EvidenceDocument(
+        schema_version="2.0",
+        target_url="https://shop.example/",
+        fetch=FetchObservation(url="https://shop.example/", status=ObservationStatus.OBSERVED),
+        page=PageEvidence(
+            url="https://shop.example/",
+            buttons=["Shop Now", "Add to Cart", "Checkout"],
+            visible_text="Shop Now Add to Cart Checkout",
+        ),
+    )
+
+    result = run_audit(
+        evidence.target_url,
+        business_context=BusinessContext(primary_conversion="Book a consultation"),
+        precollected_evidence=evidence,
+    )
+    report = render_markdown(result)
+
+    assert result.status == "context_conflict"
+    assert result.overall is None
+    assert result.agent_briefs == {}
+    assert "Report generation stopped" in report
+    assert "## Category scores" not in report
+
+    planned = run_audit(
+        evidence.target_url,
+        business_context=BusinessContext(primary_conversion="Book a consultation"),
+        precollected_evidence=evidence,
+        audit_mode=AuditMode.PLANNED_FUNNEL,
+    )
+    assert planned.status != "context_conflict"
+    assert planned.context_assessment["status"] == "overridden"
