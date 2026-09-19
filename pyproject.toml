@@ -23,7 +23,7 @@ dependencies = []
 
 [project.optional-dependencies]
 browser = ["playwright>=1.48"]
-reports = ["reportlab>=4.2,<5"]
+reports = ["reportlab>=4.2,<6"]
 dev = [
   "build>=1.2",
   "jsonschema>=4.23",
@@ -32,7 +32,7 @@ dev = [
   "PyYAML>=6.0",
   "pytest>=8.3",
   "pytest-cov>=6.0",
-  "reportlab>=4.2,<5",
+  "reportlab>=4.2,<6",
   "ruff>=0.8",
   "types-reportlab>=4.2",
 ]
