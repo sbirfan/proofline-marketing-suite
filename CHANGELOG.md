@@ -4,6 +4,19 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-09-19
+
+### Added
+
+- Shared client-report integrity validation for HTML and PDF renderers
+- Context-integrity and evidence-scope sections in both client-ready formats
+- Finding scope labels and regression tests for unresolved, site-wide, and unsourced claims
+
+### Changed
+
+- Direct renderer calls now reject unresolved context conflicts
+- Unsupported site-wide findings and findings without evidence references cannot enter client-ready reports
+
 ## [2.2.0] - 2026-09-19
 
 ### Added

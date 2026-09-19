@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from html import escape
 
 from ..models import AuditResult
+from .integrity import validate_report_integrity
 
 
 @dataclass(slots=True, frozen=True)
@@ -24,6 +25,7 @@ class ReportBrand:
 
 def render_html(result: AuditResult, brand: ReportBrand | None = None) -> str:
     """Render a self-contained report without recalculating audit semantics."""
+    validate_report_integrity(result)
     brand = brand or ReportBrand()
     score = "Unavailable" if result.overall is None else f"{result.overall:.1f}/100"
     rows = "".join(
@@ -39,7 +41,7 @@ def render_html(result: AuditResult, brand: ReportBrand | None = None) -> str:
             "<article class='finding'>"
             f"<h3>{escape(item.claim)}</h3>"
             f"<p><span class='badge'>{escape(str(item.severity))}</span> "
-            f"<code>{escape(item.id)}</code></p>"
+            f"<code>{escape(item.id)}</code> · scope: {escape(item.claim_scope)}</p>"
             f"<p>{escape(item.recommendation or 'No recommendation recorded.')}</p>"
             "<ul>"
             + "".join(
@@ -51,6 +53,8 @@ def render_html(result: AuditResult, brand: ReportBrand | None = None) -> str:
         )
         or "<p>No deterministic findings were produced from the available evidence.</p>"
     )
+    scope = result.evidence_scope
+    context = result.context_assessment
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -87,6 +91,15 @@ footer{{padding-top:12px;color:#52606d}}
 <div class="metric"><span>Overall</span><strong>{score}</strong></div>
 <div class="metric"><span>Confidence</span><strong>{result.confidence:.0%}</strong></div>
 <div class="metric"><span>Coverage</span><strong>{result.coverage:.0%}</strong></div></section>
+<section><h2>Context integrity</h2>
+<p>Status: <strong>{escape(str(context.get("status", "unknown")))}</strong>. Audit mode:
+{escape(str(context.get("audit_mode", "current_state")))}. Observed business model:
+{escape(str(context.get("observed_business_model", "unknown")))}.</p></section>
+<section><h2>Evidence scope</h2>
+<p>{len(scope.get("represented_urls", []))} represented page(s);
+{scope.get("unrepresented_discovered_count", 0)} discovered but unrepresented page(s).
+Absence claims apply to represented pages only; site-wide absence claims are not
+supported.</p></section>
 <section><h2>Category scores</h2><table><thead><tr>
 <th>Category</th><th>Score</th><th>Confidence</th><th>Coverage</th><th>Status</th>
 </tr></thead><tbody>{rows}</tbody></table></section>
