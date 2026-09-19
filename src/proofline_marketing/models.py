@@ -26,8 +26,36 @@ class Severity(StrEnum):
     CRITICAL = "critical"
 
 
+class AuditMode(StrEnum):
+    """How supplied context should be interpreted against current website evidence."""
+
+    CURRENT_STATE = "current_state"
+    PLANNED_FUNNEL = "planned_funnel"
+    CONFIRMED_OVERRIDE = "confirmed_override"
+
+
+class ContextStatus(StrEnum):
+    ALIGNED = "aligned"
+    CONFLICT = "conflict"
+    UNKNOWN = "unknown"
+    OVERRIDDEN = "overridden"
+
+
 def utc_now() -> str:
     return datetime.now(UTC).isoformat()
+
+
+def default_context_assessment() -> dict[str, Any]:
+    """Return a schema-valid assessment for directly constructed audit results."""
+    return {
+        "audit_mode": AuditMode.CURRENT_STATE,
+        "status": ContextStatus.UNKNOWN,
+        "observed_business_model": "unknown",
+        "observed_conversions": [],
+        "supplied_conversion": None,
+        "conflicts": [],
+        "resolution_required": False,
+    }
 
 
 @dataclass(slots=True)
@@ -141,6 +169,22 @@ class BusinessContext:
 
 
 @dataclass(slots=True)
+class ContextAssessment:
+    """Deterministic comparison of supplied context with observed page evidence."""
+
+    audit_mode: AuditMode
+    status: ContextStatus
+    observed_business_model: str
+    observed_conversions: list[str] = field(default_factory=list)
+    supplied_conversion: str | None = None
+    conflicts: list[str] = field(default_factory=list)
+    resolution_required: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
 class EvidenceDocument:
     schema_version: str
     target_url: str
@@ -170,6 +214,7 @@ class AuditResult:
     agent_results: dict[str, dict[str, Any]] = field(default_factory=dict)
     agent_failures: dict[str, str] = field(default_factory=dict)
     business_context: dict[str, Any] = field(default_factory=dict)
+    context_assessment: dict[str, Any] = field(default_factory=default_context_assessment)
     competitive_evidence: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

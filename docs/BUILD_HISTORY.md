@@ -20,6 +20,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Proofline compatibility rename | 1.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-rename` |
 | Proofline namespace migration | 2.0.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/proofline-v2` |
 | Context guide hotfix | 2.0.1 | Complete | 2026-09-19 | 2026-09-19 | `fix/context-guide-2.0.1` |
+| Context Integrity | 2.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/context-integrity-2.1.0` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -370,6 +371,27 @@ Quality record at phase completion:
 
 - All local gates, clean-wheel checks, GitHub CI, and CodeQL are required
 - The ShearStore regression must ask for resolution rather than recommend a consultation funnel
+
+## Phase 2.1.0 — Context Integrity
+
+Completed on 2026-09-19.
+
+Built:
+
+- Deterministic detection of ecommerce purchase, SaaS trial/demo, consultation, appointment, quote, and contact
+  conversion signals from normalized page evidence
+- Observed business-model classification without turning unobserved context into fact
+- A structured context assessment retained in every canonical audit result
+- A blocking `context_conflict` state when current-state context materially disagrees with observed conversions
+- Explicit `current_state`, `planned_funnel`, and `confirmed_override` modes, with overrides preserved in evidence
+- Specialist and final-score suppression during unresolved conflicts, plus HTML/PDF generation protection
+- CLI, schema, Markdown, beginner-guide, and regression-test support for the complete resolution workflow
+
+Quality record at phase completion:
+
+- Ruff formatting/lint, strict mypy, pytest/coverage, schema validation, release validation, package build, and
+  clean-wheel smoke checks are required locally
+- Phase/release pull requests and both post-merge commits require successful GitHub CI and CodeQL
 
 ## Maintenance rule
 
