@@ -17,6 +17,7 @@ def test_parser_exposes_stable_commands() -> None:
     assert audit.command == "audit"
     assert audit.format == "markdown"
     assert audit.audit_mode == "current_state"
+    assert audit.browser_privacy_mode is False
 
 
 def test_parser_accepts_explicit_planned_funnel_mode() -> None:
@@ -24,6 +25,14 @@ def test_parser_accepts_explicit_planned_funnel_mode() -> None:
         ["audit", "https://example.test/", "--audit-mode", "planned_funnel"]
     )
     assert args.audit_mode == "planned_funnel"
+
+
+def test_parser_accepts_browser_privacy_mode() -> None:
+    args = cli.build_parser().parse_args(
+        ["audit", "https://example.test/", "--browser-fallback", "--browser-privacy-mode"]
+    )
+    assert args.browser_fallback is True
+    assert args.browser_privacy_mode is True
 
 
 def test_primary_program_name_is_proofline() -> None:

@@ -22,6 +22,7 @@ def run_audit(
     *,
     timeout: float = 15.0,
     browser_fallback: bool = False,
+    browser_privacy_mode: bool = False,
     business_context: BusinessContext | None = None,
     specialist_executors: Mapping[str, SpecialistExecutor] | None = None,
     precollected_evidence: EvidenceDocument | None = None,
@@ -30,7 +31,11 @@ def run_audit(
 ) -> AuditResult:
     """Collect once, fan out immutable briefs, then synthesize validated results."""
     context = business_context or BusinessContext()
-    collector = EvidenceCollector(timeout=timeout, browser_fallback=browser_fallback)
+    collector = EvidenceCollector(
+        timeout=timeout,
+        browser_fallback=browser_fallback,
+        browser_privacy_mode=browser_privacy_mode,
+    )
     evidence = precollected_evidence or collector.collect(url)
     context_assessment = assess_context(evidence, context, audit_mode)
     competitor_evidence = dict(precollected_competitors or {})
