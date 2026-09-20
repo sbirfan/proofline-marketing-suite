@@ -4,6 +4,20 @@ All notable changes will be documented here. The project follows Semantic Versio
 
 ## [Unreleased]
 
+## [2.3.1] - 2026-09-20
+
+### Added
+
+- Opt-in `--browser-privacy-mode` for rendered fallback, blocking third-party HTTP(S) subresources and service
+  workers while allowing the audited host and local browser resources
+- Dedicated GitHub CI job that installs Chromium and exercises Proofline's actual rendered-page adapter
+
+### Fixed
+
+- Removed an obsolete Playwright import suppression that failed strict mypy with current Playwright types
+- CI now type-checks with the optional browser extra installed while local type checks remain valid without it
+- Development dependencies now accept supported ReportLab 5 releases
+
 ## [2.3.0] - 2026-09-19
 
 ### Added

@@ -62,4 +62,6 @@ jobs:
       - run: >-
           python -c "from proofline_marketing.crawler.browser import render_html;
           assert '<h1>Proofline</h1>' in
-          render_html('data:text/html,<h1>Proofline</h1>')"
+          render_html('data:text/html,<h1>Proofline</h1>');
+          assert '<h1>Private</h1>' in
+          render_html('data:text/html,<h1>Private</h1>', privacy_mode=True)"

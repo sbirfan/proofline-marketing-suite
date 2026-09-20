@@ -23,6 +23,7 @@ that phase. Dates use UTC and refer to repository implementation work, not promi
 | Context Integrity | 2.1.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/context-integrity-2.1.0` |
 | Evidence Integrity | 2.2.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/evidence-integrity-2.2.0` |
 | Reporting Integrity | 2.3.0 | Complete | 2026-09-19 | 2026-09-19 | `feature/reporting-integrity-2.3.0` |
+| Browser Privacy Maintenance | 2.3.1 | Complete | 2026-09-20 | 2026-09-20 | `feature/browser-privacy-2.3.1` |
 
 ## Phase 0.1.0 — Foundation
 
@@ -431,6 +432,24 @@ Quality record at phase completion:
 
 - All local quality, schema, report, package, and clean-wheel gates are required
 - Phase/release PRs and post-merge commits require successful GitHub CI and CodeQL
+
+## Phase 2.3.1 — Browser Privacy Maintenance
+
+Completed on 2026-09-20.
+
+Built:
+
+- An opt-in browser privacy mode that limits rendered fallback to the audited host, data/blob/about resources,
+  and blocks service workers
+- A documented completeness tradeoff for pages that depend on third-party scripts, fonts, media, or analytics
+- Strict-mypy coverage with and without the optional Playwright dependency
+- A GitHub CI browser job that installs Chromium and exercises the real rendered-page adapter
+- ReportLab 5 development compatibility
+
+Quality record at phase completion:
+
+- Local format, lint, strict typing, unit/integration, coverage, schema, release, and package gates are required
+- Phase/release PRs and post-merge commits require successful GitHub CI, Chromium launch, and CodeQL
 
 ## Maintenance rule
 
