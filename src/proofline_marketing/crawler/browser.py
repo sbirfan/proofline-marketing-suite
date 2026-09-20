@@ -11,7 +11,7 @@ def browser_available() -> bool:
 
 def render_html(url: str, *, timeout_ms: int = 20_000) -> str:
     try:
-        from playwright.sync_api import sync_playwright  # type: ignore[import-not-found]
+        from playwright.sync_api import sync_playwright
     except ImportError as error:
         raise RuntimeError(
             "Install proofline-marketing-suite[browser] and Playwright Chromium"

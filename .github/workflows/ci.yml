@@ -22,7 +22,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[dev]"
+      - run: python -m pip install -e ".[dev,browser]"
       - run: ruff format --check .
       - run: ruff check .
       - run: mypy src
@@ -47,3 +47,19 @@ jobs:
       - run: .package-smoke/bin/python -c "from playwright.sync_api import sync_playwright; assert sync_playwright"
       - run: .package-smoke/bin/python -m pip install ".[reports]"
       - run: .package-smoke/bin/python -c "from reportlab.pdfgen import canvas; assert canvas"
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[browser]"
+      - run: python -m playwright install --with-deps chromium
+      - run: >-
+          python -c "from proofline_marketing.crawler.browser import render_html;
+          assert '<h1>Proofline</h1>' in
+          render_html('data:text/html,<h1>Proofline</h1>')"
