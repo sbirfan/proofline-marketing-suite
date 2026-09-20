@@ -14,9 +14,16 @@ from .sitemap import inspect_sitemap
 
 
 class EvidenceCollector:
-    def __init__(self, *, timeout: float = 15.0, browser_fallback: bool = False) -> None:
+    def __init__(
+        self,
+        *,
+        timeout: float = 15.0,
+        browser_fallback: bool = False,
+        browser_privacy_mode: bool = False,
+    ) -> None:
         self.client = SafeHttpClient(timeout=timeout)
         self.browser_fallback = browser_fallback
+        self.browser_privacy_mode = browser_privacy_mode
 
     def collect(self, url: str) -> EvidenceDocument:
         normalized = normalize_url(url)
@@ -36,7 +43,9 @@ class EvidenceCollector:
                 if self.browser_fallback and browser_available():
                     try:
                         rendered = render_html(
-                            final_url, timeout_ms=int(self.client.timeout * 1000)
+                            final_url,
+                            timeout_ms=int(self.client.timeout * 1000),
+                            privacy_mode=self.browser_privacy_mode,
                         )
                     except (RuntimeError, TimeoutError):
                         result.observation.reason = "browser_render_failed"

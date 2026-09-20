@@ -3,7 +3,7 @@
 Evidence-first marketing audits for Claude Code, with structured collection states, deterministic checks,
 reproducible scoring, and source-backed recommendations.
 
-> **Status:** stable (`2.3.0 — Reporting Integrity`). The suite includes evidence-backed audit, analysis,
+> **Status:** stable (`2.3.1 — Browser Privacy Maintenance`). The suite includes evidence-backed audit, analysis,
 > reporting, and review-ready campaign skills for copy, email, social, ads, launches, and proposals. Generation
 > requires explicit context and produces drafts only; it never publishes, sends, launches, signs, or mutates an
 > external account without separate approval.
@@ -40,6 +40,7 @@ different states. Scores use a single 0–100 scale, with confidence and coverag
 | Context Integrity | 2.1.0 | Complete | 2026-09-19 |
 | Evidence Integrity | 2.2.0 | Complete | 2026-09-19 |
 | Reporting Integrity | 2.3.0 | Complete | 2026-09-19 |
+| Browser Privacy Maintenance | 2.3.1 | Complete | 2026-09-20 |
 
 The detailed, dated record of what each phase built and deferred is maintained in
 [Build history](docs/BUILD_HISTORY.md).
@@ -71,6 +72,7 @@ Run an audit:
 proofline audit https://example.com --format markdown
 proofline audit https://example.com --format json --output .audit/example.json
 proofline audit https://example.com --browser-fallback
+proofline audit https://example.com --browser-fallback --browser-privacy-mode
 proofline audit https://example.com --format html --output report.html
 proofline audit https://example.com --format pdf --output report.pdf
 proofline audit https://example.com --audience "Operations leaders" --offer "Demo"
@@ -153,6 +155,7 @@ evidence rather than browsing independently.
 - Prompt-boundary neutralization, recursive secret redaction, credential-safe URLs, and bounded prompt inputs
 - Reproducible source/wheel builds with metadata validation and clean-environment CLI installation in CI
 - Optional browser-extra smoke checks, CodeQL scanning, Dependabot updates, and checksummed tag artifacts
+- Optional first-party-only browser privacy mode that blocks third-party HTTP(S) subresources and service workers
 - Six structured specialist briefs with explicit business context, limitations, and prohibited actions
 - Confirmed competitor collection under the same bounded policy, with comparable states and retrieval provenance
 - Concurrent caller-supplied specialist adapters with schema validation and isolated failure recording
@@ -180,6 +183,10 @@ does not yet schedule every discovered page. It detects likely app shells and ca
 optional Playwright support is installed. Competitive and growth scores remain `not_tested` unless validated
 specialist assessments are supplied. A partial overall covers tested categories only. The CLI creates briefs but
 does not invoke an external language model. Competitor collection requires explicit target confirmation.
+
+Browser privacy mode is opt-in because blocking third-party resources can reduce rendered-page completeness. It
+still connects to the audited website, which receives the audit request and network address. Same-host resources,
+including same-host analytics, remain available; subdomains count as third parties in this strict mode.
 
 Audit output is decision support, not a guarantee of search rankings, accessibility compliance, privacy
 compliance, or revenue impact. Manually verify client-facing claims.

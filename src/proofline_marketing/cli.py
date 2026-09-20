@@ -27,6 +27,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Render likely app shells when optional Playwright support is installed",
     )
+    audit.add_argument(
+        "--browser-privacy-mode",
+        action="store_true",
+        help="During browser fallback, block third-party requests and service workers",
+    )
     audit.add_argument("--audience", help="User-confirmed audience; never inferred from page copy")
     audit.add_argument("--offer", help="User-confirmed offer")
     audit.add_argument("--primary-conversion", help="User-confirmed primary conversion action")
@@ -71,6 +76,7 @@ def main(argv: list[str] | None = None) -> int:
         args.url,
         timeout=args.timeout,
         browser_fallback=args.browser_fallback,
+        browser_privacy_mode=args.browser_privacy_mode,
         business_context=context,
         audit_mode=args.audit_mode,
     )

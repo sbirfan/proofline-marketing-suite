@@ -95,6 +95,11 @@ python -m playwright install chromium
 
 Browser installation can take several minutes and uses additional disk space.
 
+For a stricter rendered audit, add `--browser-privacy-mode`. This blocks third-party HTTP(S) resources and
+service workers while keeping the audited host and local browser resources available. The audited website still
+receives the request. Because blocked analytics, fonts, media, or scripts can change the rendered result, compare
+with a normal browser-fallback audit when completeness matters.
+
 ## Part 3 — Start Claude Code with the marketing suite
 
 Keep the terminal inside the `proofline-marketing-suite` folder and run:
@@ -215,6 +220,12 @@ Use this only after installing the optional browser support:
 
 ```bash
 proofline audit https://example.com --browser-fallback --format pdf --output report.pdf
+```
+
+To prevent third-party subresource requests during that rendered fallback:
+
+```bash
+proofline audit https://example.com --browser-fallback --browser-privacy-mode --format pdf --output report.pdf
 ```
 
 The new files appear in the `proofline-marketing-suite` folder. In Visual Studio Code, use the file list on the
